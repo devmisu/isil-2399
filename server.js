@@ -1,16 +1,16 @@
+require('dotenv').config()
 const express = require('express')
 const mysql = require('mysql')
 const myconn = require('express-myconnection')
 
 const app = express()
-app.set('port', process.env.PORT || 9000)
 
 const dbOptions = {
-    host: '3.80.132.248',
-    port: 3306,
-    user: 'root',
-    password: '#4tKTNH2W*n%',
-    database: 'solera_jobs'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 }
 
 // Middlewares
@@ -25,6 +25,6 @@ app.get('/', (req, res) => {
 app.use('/api', require('./routes/routes'))
 
 // Server
-app.listen(app.get('port'), () => {
-    console.log('server running on port', app.get('port'))
+app.listen(process.env.SERVER_PORT, () => {
+    console.log('server running on port', process.env.SERVER_PORT)
 })
