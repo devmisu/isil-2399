@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const myconn = require('express-myconnection')
 
 const app = express()
-app.set('port', process.env.PORT || 80)
+app.set('port', process.env.PORT || 9000)
 
 const dbOptions = {
     host: '127.0.0.1',
