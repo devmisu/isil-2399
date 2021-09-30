@@ -3,10 +3,10 @@ const mysql = require('mysql')
 const myconn = require('express-myconnection')
 
 const app = express()
-app.set('port', process.env.PORT || 9000)
+app.set('port', process.env.PORT || 80)
 
 const dbOptions = {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 3306,
     user: 'root',
     password: '#4tKTNH2W*n%',
@@ -25,6 +25,6 @@ app.get('/', (req, res) => {
 app.use('/api', require('./routes/routes'))
 
 // Server
-app.listen(9000, () => {
+app.listen(app.get('port'), () => {
     console.log('server running on port', app.get('port'))
 })
