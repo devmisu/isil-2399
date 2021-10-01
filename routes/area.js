@@ -5,12 +5,6 @@ const util = require('../common/util')
 // Create
 routes.post('/', (req, res) => {
 
-    const logger = {
-        endpoint: req.protocol + '://' + req.get('host') + req.originalUrl,
-        headers: req.headers,
-        body: req.body
-    }
-
     const { result, devMessage } = util.sanitize(req.body, ['name'])
 
     if (!result) {

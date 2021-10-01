@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mysql = require('mysql')
 const myconn = require('express-myconnection')
+const winston = require('winston')
+const expressWinston = require('express-winston')
 
 const app = express()
 
@@ -17,12 +19,39 @@ const dbOptions = {
 app.use(myconn(mysql, dbOptions, 'single'))
 app.use(express.json())
 
+// Logger
+app.use(expressWinston.logger({
+    transports: [
+        new winston.transports.Console()
+    ],
+    format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.json()
+    ),
+    requestWhitelist: ['body'],
+    responseWhitelist: ['body']
+}))
+
 // Routes
 app.get('/', (req, res) => {
     res.send('Solera Jobs!')
 })
 
 app.use('/api', require('./routes/routes'))
+
+// Error logger
+if (process.env.NODE_ENV == 'development') {
+    
+    app.use(expressWinston.errorLogger({
+        transports: [
+            new winston.transports.Console()
+        ],
+        format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.json()
+        )
+    }))
+}
 
 // Server
 app.listen(process.env.SERVER_PORT, () => {
