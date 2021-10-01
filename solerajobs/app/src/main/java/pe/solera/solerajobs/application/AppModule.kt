@@ -15,6 +15,7 @@ import javax.inject.Singleton
 object AppModule {
 
     @Singleton
+    @Provides
     fun provideApplication(@ApplicationContext app: Context) : BaseApplication {
         return app as BaseApplication
     }
@@ -28,6 +29,13 @@ object AppModule {
         return context.getString(R.string.base_url)
     }
 
-
+    @Singleton
+    @Provides
+    @Named("encryptPass")
+    fun provideEncryptPass(
+        @ApplicationContext context: Context
+    ) : String {
+        return context.getString(R.string.encryptPass)
+    }
 
 }

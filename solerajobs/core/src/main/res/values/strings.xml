@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SoleraJobs</string>
-    
-    <string name="server_client_id">1028378897751-26ajlfcu97mo8n9d0f1a00lcfc1p26vo.apps.googleusercontent.com</string>
-
     <string name="network_error">Hay un problema de conexión. Por favor intente en unos minutos.</string>
     <string name="no_internet_connection_error">No cuenta con conexión a internet.</string>
     <string name="airplane_error">Desactivar el modo avión para continuar.</string>
@@ -15,5 +11,4 @@
     <string name="no_fingerprints">No cuenta con huellas registradas.</string>
     <string name="unknown_status">Error desconocido.</string>
     <string name="authentication_error">Error de autenticación: %1$s</string>
-
 </resources>

@@ -1,6 +1,7 @@
 package pe.solera.repository.network.di
 
 import android.content.Context
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import pe.solera.core.ConstantsCore.Server.CACHE_SIZE
 import pe.solera.core.ConstantsCore.Server.TIMEOUT
+import pe.solera.repository.local.preferences.manager.PreferencesManager
 import pe.solera.repository.network.api.SoleraJobsApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -57,8 +59,12 @@ object RetrofitModule {
     }
 
     @Provides
-    fun provideApiInterceptor() : ApiInterceptor {
-        return ApiInterceptor()
+    fun provideApiInterceptor(
+        @ApplicationContext context: Context,
+        preferencesManager: PreferencesManager,
+        gson: Gson
+    ) : ApiInterceptor {
+        return ApiInterceptor(context, preferencesManager, gson)
     }
 
     @Provides
