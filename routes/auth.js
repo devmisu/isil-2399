@@ -2,13 +2,14 @@ require('dotenv').config()
 const express = require('express')
 const routes = express.Router()
 const {OAuth2Client} = require('google-auth-library');
+const jwt = require('jsonwebtoken');
 
 // Login
 routes.post('/', (req, res) => {
 
-    const idToken = req.body['idToken']
+    const { idToken } = req.body;
 
-    if (idToken == null || idToken == '') {
+    if (!idToken) {
         return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: 'Enviar campo idToken' })
     }
 
@@ -27,12 +28,17 @@ routes.post('/', (req, res) => {
             return res.status(400).json({ message: 'El email ingresado no pertenece a Solera.' })
         }
 
-        // Que hago con el 'sub'??
-        // Usar 'email' para sacar info de bd
-        // Crear sesion y retornar data
+        const token = jwt.sign({ user_id: userid, email }, process.env.JWT_SECRET_KEY, { expiresIn: '1m' })
 
-        console.log(payload)
-        res.json(payload)
+        res.json({
+            session: {
+                type: 'Bearer',
+                token: token
+            },
+            user: {
+                email: email
+            }
+        })
     })
 })
 
