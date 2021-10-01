@@ -24,11 +24,8 @@ app.use(expressWinston.logger({
     transports: [
         new winston.transports.Console()
     ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    ),
-    requestWhitelist: ['body'],
+    format: winston.format.simple(),
+    requestWhitelist: ['headers', 'body'],
     responseWhitelist: ['body']
 }))
 
