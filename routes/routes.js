@@ -6,5 +6,6 @@ routes.get('/', (req, res) => {
 })
 
 routes.use('/client', require('./client'))
+routes.use('/auth', require('./auth'))
 
 module.exports = routes
