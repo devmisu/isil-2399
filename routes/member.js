@@ -5,20 +5,18 @@ const util = require('../common/util')
 // Create
 routes.post('/', (req, res) => {
 
-    const logger = {
-        endpoint: req.protocol + '://' + req.get('host') + req.originalUrl,
-        headers: req.headers,
-        body: req.body
-    }
-
-    const { result, devMessage } = util.sanitize(req.body, ['name'])
+    const { result, devMessage } = util.sanitize(req.body, ['first_name', 'last_name', 'email', 'phone', 'id_job'])
 
     if (!result) {
         return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })
     }
 
     const params = {
-        name: req.body['name'],
+        first_name: req.body['first_name'],
+        last_name: req.body['last_name'],
+        email: req.body['email'],
+        phone: req.body['phone'],
+        id_job: req.body['id_job'],
         created_at: util.currentDate()
     }
 
@@ -26,7 +24,7 @@ routes.post('/', (req, res) => {
 
         if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err })
 
-        conn.query('INSERT INTO area SET ?', [params], (err, _) => {
+        conn.query('INSERT INTO member SET ?', [params], (err, _) => {
 
             if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] })
             res.status(201).json([])
