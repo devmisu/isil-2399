@@ -9,8 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pe.solera.repository.local.preferences.manager.PreferencesManager
-import pe.solera.repository.local.preferences.source.user.UserPreferencesImpl
-import pe.solera.repository.local.preferences.source.user.UserPreferencesRepository
+import pe.solera.repository.local.preferences.source.user.LoginPreferencesImpl
+import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -50,6 +50,6 @@ object PreferencesModule {
     fun provideUserPreferences(
         preferencesManager: PreferencesManager,
         gson: Gson
-    ) : UserPreferencesRepository = UserPreferencesImpl(preferencesManager, gson)
+    ) : LoginPreferencesRepository = LoginPreferencesImpl(preferencesManager, gson)
 
 }

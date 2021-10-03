@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import pe.solera.core.extension.launchOnIO
-import pe.solera.repository.local.preferences.source.user.UserPreferencesRepository
+import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import pe.solera.repository.network.api.login.LoginNetworkRepository
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class LoginViewModel
 @Inject
 constructor(
     private val loginNetworkRepository: LoginNetworkRepository,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val loginPreferencesRepository: LoginPreferencesRepository
 ): ViewModel() {
 
     private val loginEvent : MutableLiveData<LoginEventResult> = MutableLiveData()
@@ -27,8 +27,8 @@ constructor(
                 loginNetworkRepository.sendGoogleIdToken(idToken)
             },
             result = {
-                userPreferencesRepository.saveUserWithAuthToken(it)
-                loginEvent.value = LoginEventResult.UserInfo(it.user)
+                loginPreferencesRepository.saveUserWithAuthToken(it)
+                loginEvent.value = LoginEventResult.AccessApp(it.user)
             },
             error = {
                 loginEvent.value = LoginEventResult.Error(it)

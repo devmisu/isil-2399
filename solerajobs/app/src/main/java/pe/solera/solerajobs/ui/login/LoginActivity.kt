@@ -19,8 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
+import pe.solera.core.BaseException
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ActivityLoginBinding
+import pe.solera.solerajobs.ui.main.MainActivity
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -29,30 +31,40 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel : LoginViewModel by viewModels()
 
-    private lateinit var requestSignInOptions: GoogleSignInOptions
-    private lateinit var googleSignInClient : GoogleSignInClient
+    private val requestSignInOptions: GoogleSignInOptions by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.server_client_id))
+            .requestEmail()
+            .build()
+    }
+
+    private val googleSignInClient : GoogleSignInClient by lazy {
+        GoogleSignIn.getClient(this, requestSignInOptions)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupSignInClient()
         setSignInButton()
+        observeViewModel()
     }
 
-    private fun setupSignInClient() {
-        requestSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.server_client_id))
-            .requestEmail()
-            .build()
-        googleSignInClient = GoogleSignIn.getClient(this, requestSignInOptions)
+    private fun observeViewModel() {
+        viewModel.loginEventLiveData.observe(this) {
+            when(it) {
+                is LoginEventResult.AccessApp -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+            }
+        }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val idToken = account.idToken
-            viewModel.login(idToken)
+            viewModel.login(idToken ?: throw BaseException.UnAuthorizeException(getString(R.string.not_authorized)))
         } catch (ex: Exception) {
             ex.printStackTrace()
         }

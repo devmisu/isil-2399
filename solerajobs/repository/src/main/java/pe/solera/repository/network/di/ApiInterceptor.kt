@@ -37,8 +37,7 @@ class ApiInterceptor(
             throw BaseException.NetworkException(context.getString(R.string.network_error))
         } else {
             val authUser = preferences.getString(ConstantsRepository.Preferences.PREFERENCE_USER_WITH_TOKEN)
-            val authUserModel = gson.fromJson(authUser, Authentication::class.java)
-            val token = authUserModel.token
+            val token = gson.fromJson(authUser, Authentication::class.java)?.token ?: String()
             val request : Request = chain.request().newBuilder().let {
                 if (token.trim().isNotEmpty()) { it.header(AUTHORIZATION, token) }
                 it.header(X_OS, PLATFORM)
