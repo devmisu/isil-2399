@@ -12,8 +12,4 @@ const sanitize = function (params, keys) {
     }
 }
 
-const currentDate = function () {
-    return format(new Date(), 'yyyy-MM-dd HH:mm:ss')
-}
-
-module.exports = { sanitize, currentDate }
+module.exports = { sanitize }

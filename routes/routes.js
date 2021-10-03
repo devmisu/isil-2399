@@ -5,10 +5,20 @@ routes.get('/', (req, res) => {
     res.send('v1')
 })
 
-// routes.use('/client', require('./client'))
-routes.use('/area', require('./area'))
-routes.use('/job', require('./job'))
-routes.use('/member', require('./member'))
-routes.use('/auth', require('./auth'))
+// CRUD
+const API = [
+    'area',
+    'client',
+    'job',
+    'member_requirement',
+    'member',
+    'project',
+    'requirement',
+    'auth'
+]
+
+API.forEach(route => {
+    routes.use('/' + route, require('./' + route))
+});
 
 module.exports = routes
