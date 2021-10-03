@@ -17,7 +17,7 @@ enum class ErrorType(val code: Int) {
 
         fun returnException(code: Int?, message: String?, detail: String?) : BaseException {
             return when (findErrorBy(code ?: ConstantsCore.Error.Code.generalErrorCode)) {
-                UNAUTHORIZED -> BaseException.UnAuthorizeException(message ?: String())
+                UNAUTHORIZED -> BaseException.UnAuthorizeException(message ?: ConstantsCore.Error.Message.unAuthorizeMessage)
                 else -> BaseException.GeneralException(
                     errorCode          = code    ?: ConstantsCore.Error.Code.generalErrorCode,
                     errorMessage       = message ?: ConstantsCore.Error.Message.generalErrorMessage,

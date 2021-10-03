@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ActivityMainBinding
+import pe.solera.solerajobs.ui.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding : ActivityMainBinding
 

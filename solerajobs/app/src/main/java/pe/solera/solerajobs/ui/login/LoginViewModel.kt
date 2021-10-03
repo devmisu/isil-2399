@@ -3,7 +3,11 @@ package pe.solera.solerajobs.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pe.solera.core.extension.launchOnIO
 import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import pe.solera.repository.network.api.login.LoginNetworkRepository
@@ -34,6 +38,14 @@ constructor(
                 loginEvent.value = LoginEventResult.Error(it)
             }
         )
+    }
+
+    fun deleteUserData() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                loginPreferencesRepository.deleteUserWithAuthToken()
+            }
+        }
     }
 
 }

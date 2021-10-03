@@ -4,18 +4,6 @@
 
     <string name="server_client_id">1028378897751-26ajlfcu97mo8n9d0f1a00lcfc1p26vo.apps.googleusercontent.com</string>
 
-    <string name="network_error">Hay un problema de conexión. Por favor intente en unos minutos.</string>
-    <string name="no_internet_connection_error">No cuenta con conexión a internet.</string>
-    <string name="airplane_error">Desactivar el modo avión para continuar.</string>
-    <string name="want_to_leave_app">¿Quiere salir de la aplicación?</string>
-
-    <string name="can_authenticate">Correct</string>
-    <string name="no_hardware">No cuenta con hardware de autenticación biometrica.</string>
-    <string name="unavailable">No es posible realizar la operación.</string>
-    <string name="no_fingerprints">No cuenta con huellas registradas.</string>
-    <string name="unknown_status">Error desconocido.</string>
-    <string name="authentication_error">Error de autenticación: %1$s</string>
-
-    <string name="not_authorized">Ocurrió un problema con la validación de sesión.</string>
+    <string name="solera_jobs">Solera Jobs</string>
 
 </resources>

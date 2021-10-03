@@ -11,4 +11,7 @@
     <string name="no_fingerprints">No cuenta con huellas registradas.</string>
     <string name="unknown_status">Error desconocido.</string>
     <string name="authentication_error">Error de autenticación: %1$s</string>
+
+    <string name="not_authorized">Ocurrió un problema con la validación de sesión.</string>
+
 </resources>

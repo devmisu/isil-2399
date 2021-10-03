@@ -51,6 +51,7 @@ object ConstantsCore {
             const val airplaneError        : String = "Desactivar el modo avión para continuar."
             const val errorNetwork         : String = "Hay un problema de conexión. Por favor intente en unos minutos."
             const val resourceErrorMessage : String = "Hubo un problema obteniendo el recurso"
+            const val unAuthorizeMessage   : String = "Sesión no autorizada."
         }
         object View {
             const val cantFindView         : String = "No se pudo encontrar view"

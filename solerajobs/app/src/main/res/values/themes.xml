@@ -12,7 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/background</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.SoleraJobs.NoActionBar">
@@ -23,4 +24,37 @@
     <style name="Theme.SoleraJobs.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SoleraJobs.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Font-->
+    <style name="Font" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:lineSpacingMultiplier">1.8</item>
+    </style>
+
+    <style name="Font.Regular" parent="Font">
+        <item name="android:fontFamily">@font/font_regular</item>
+    </style>
+
+    <style name="Font.Medium" parent="Font">
+        <item name="android:fontFamily">@font/font_medium</item>
+    </style>
+
+    <style name="Font.Semibold" parent="Font">
+        <item name="android:fontFamily">@font/font_semibold</item>
+    </style>
+
+    <style name="Font.Bold" parent="Font">
+        <item name="android:fontFamily">@font/font_bold</item>
+    </style>
+
+    <style name="Font.Light" parent="Font">
+        <item name="android:fontFamily">@font/font_light</item>
+    </style>
+
+    <style name="Font.Italic" parent="Font">
+        <item name="android:fontFamily">@font/font_italic</item>
+    </style>
+    <!--End Font-->
+
 </resources>

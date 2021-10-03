@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import pe.solera.core.ScreenDimensions
 import pe.solera.solerajobs.R
 import javax.inject.Named
 import javax.inject.Singleton
@@ -37,5 +38,11 @@ object AppModule {
     ) : String {
         return context.getString(R.string.encryptPass)
     }
+
+    @Singleton
+    @Provides
+    fun provideScreenDimensions(
+        @ApplicationContext context: Context
+    ) : ScreenDimensions = ScreenDimensions(context)
 
 }

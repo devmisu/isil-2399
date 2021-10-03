@@ -58,3 +58,17 @@ fun Context?.hasMobileData() : Boolean {
         return test == 0
     } ?: false
 }
+
+//Metrics
+
+fun Context?.screenSize(sizeType: CoreSizeType) : Int {
+    return this?.let {
+        val displayMetrics = it.resources.displayMetrics
+        return if (sizeType == CoreSizeType.HEIGHT) displayMetrics.heightPixels else displayMetrics.widthPixels
+    } ?: 0
+}
+
+enum class CoreSizeType {
+    HEIGHT,
+    WIDTH;
+}
