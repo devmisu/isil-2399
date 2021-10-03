@@ -55,8 +55,33 @@ routes.post('/login', (req, res) => {
     })
 })
 
-routes.post('/welcome', auth, (req, res) => {
-    res.json(req.user)
+// Get current requirements
+routes.get('/requirements', auth, (req, res) => {
+
+    const { result, devMessage } = util.sanitize(req.query, ['date'])
+
+    if (!result) {
+        return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })
+    }
+
+    const params = [
+        req.user.email,
+        req.query['date']
+    ]
+
+    req.getConnection((err, conn) => {
+
+        if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err })
+
+        conn.query('CALL get_current_requirements(?)', [params], (err, rows) => {
+
+            if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] })
+
+            if (rows[0] == null) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: 'El usuario no existe en la base de datos.' })
+
+            res.json(rows[0])
+        })
+    })
 })
 
 module.exports = routes
