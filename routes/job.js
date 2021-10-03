@@ -12,8 +12,8 @@ routes.post('/', (req, res) => {
     }
 
     const params = [
-        req.body['id_area'],
-        req.body['name']
+        req.body['name'],
+        req.body['id_area']
     ]
 
     req.getConnection((err, conn) => {
@@ -71,8 +71,8 @@ routes.put('/:id', (req, res) => {
 
     const params = [
         req.params.id,
-        req.body['id_area'],
-        req.body['name']
+        req.body['name'],
+        req.body['id_area']
     ]
 
     req.getConnection((err, conn) => {
