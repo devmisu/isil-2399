@@ -6,19 +6,17 @@ routes.get('/', (req, res) => {
 })
 
 // CRUD
-const API = [
-    'area',
-    'client',
-    'job',
-    'member_requirement',
-    'member',
-    'project',
-    'requirement',
-    'auth'
-]
+const CRUD = ['area', 'client', 'job', 'member_requirement', 'member', 'project', 'requirement']
 
-API.forEach(route => {
-    routes.use('/' + route, require('./' + route))
+CRUD.forEach(route => {
+    routes.use('/' + route, require('./crud/' + route))
+});
+
+// APP
+const APP = ['user']
+
+APP.forEach(route => {
+    routes.use('/' + route, require('./app/' + route))
 });
 
 module.exports = routes

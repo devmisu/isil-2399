@@ -3,10 +3,11 @@ const express = require('express')
 const routes = express.Router()
 const {OAuth2Client} = require('google-auth-library');
 const jwt = require('jsonwebtoken');
-const util = require('../common/util')
+const util = require('../../common/util')
+const auth = require('../../middlewares/auth')
 
 // Login
-routes.post('/', (req, res) => {
+routes.post('/login', (req, res) => {
 
     const { result, devMessage } = util.sanitize(req.body, ['idToken'])
 
@@ -36,22 +37,26 @@ routes.post('/', (req, res) => {
 
             if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err })
 
-            conn.query('SELECT * FROM member WHERE email = ?', [email], (err, rows) => {
+            conn.query('CALL get_member_info(?)', [email], (err, rows) => {
 
                 if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] })
 
-                if (rows[0] == null) return res.status(500).json({ message: 'Ocurrio un error inesperado.' })
+                if (rows[0][0] == null) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: 'El usuario no existe en la base de datos.' })
 
                 res.json({
                     session: {
                         type: 'Bearer',
                         token: token
                     },
-                    member: rows[0]
+                    user: rows[0][0]
                 })
             })
         })
     })
+})
+
+routes.post('/welcome', auth, (req, res) => {
+    res.json(req.user)
 })
 
 module.exports = routes
