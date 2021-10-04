@@ -6,4 +6,8 @@
 
     <string name="solera_jobs">Solera Jobs</string>
 
+    <string name="nav_tasks">Tareas</string>
+    <string name="nav_stadistics">Estadisticas</string>
+    <string name="nav_config">Configuración</string>
+
 </resources>

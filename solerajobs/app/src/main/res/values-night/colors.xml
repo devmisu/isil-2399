@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#FFFFFFFF</color>
+    <color name="background">#FF000000</color>
 
     <color name="blue">#2699fb</color>
     <color name="skyblue">#bce0fd</color>
     <color name="skyblue_light">#f1f9ff</color>
     <color name="transparent">@android:color/transparent</color>
 
-    <color name="bottom_sheet_stroke">#f5f5f5</color>
+    <color name="bottom_sheet_stroke">#2699fb</color>
 
-    <color name="bottom_nav_bg">#2699fb</color>
+    <color name="bottom_nav_bg">@android:color/transparent</color>
     <color name="bottom_nav_stroke">#2699fb</color>
-    <color name="bottom_nav_text_enabled">#f1f9ff</color>
+    <color name="bottom_nav_text_enabled">#2699fb</color>
     <color name="bottom_nav_text_disabled">#bce0fd</color>
 
-    <color name="button_bg">#FFFFFFFF</color>
+    <color name="button_bg">#FF000000</color>
 
     <color name="text_main">#2699fb</color>
     <color name="text_secondary">#bce0fd</color>

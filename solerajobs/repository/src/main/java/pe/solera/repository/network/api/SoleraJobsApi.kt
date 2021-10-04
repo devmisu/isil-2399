@@ -14,7 +14,7 @@ interface SoleraJobsApi {
     @GET("56a89a0d0480347f0f8cabe39e2b72d4")
     suspend fun getUser() : Response<BaseResponse<UserResponse>>
 
-    @POST("auth")
+    @POST("user/login")
     suspend fun login(@Body request: LoginRequest) : Response<LoginResponse>
 
 }

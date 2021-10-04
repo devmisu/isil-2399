@@ -1,10 +1,15 @@
 package pe.solera.solerajobs.ui.splash
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import pe.solera.core.extension.setAnyBackgroundTintColor
+import pe.solera.core.extension.setImageTintColor
+import pe.solera.solerajobs.BuildConfig
+import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ActivitySplashBinding
 import pe.solera.solerajobs.ui.BaseActivity
 import pe.solera.solerajobs.ui.login.LoginActivity
@@ -21,6 +26,10 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val nightModeFlags =  resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO) {
+            binding.imgLogo.setImageTintColor(R.color.blue)
+        }
         viewModel.validateSession()
         observeViewModel()
     }

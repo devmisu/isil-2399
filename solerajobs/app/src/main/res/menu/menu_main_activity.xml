@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_item_tasks"
+        android:title="@string/nav_tasks"
+        android:icon="@drawable/selector_bottom_nav_stadistics"/>
+    <item
+        android:id="@+id/bottom_nav_item_stadistics"
+        android:title="@string/nav_stadistics"
+        android:icon="@drawable/selector_bottom_nav_stadistics"/>
+    <item
+        android:id="@+id/bottom_nav_item_config"
+        android:title="@string/nav_config"
+        android:icon="@drawable/selector_bottom_nav_stadistics"/>
+</menu>

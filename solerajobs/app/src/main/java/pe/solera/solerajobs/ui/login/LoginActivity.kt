@@ -74,16 +74,17 @@ class LoginActivity : BaseActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        println("NEW INTENT")
-        validateUnAuthorized(intent)
-        setSignInButton()
+        validateUnAuthorized(intent) {
+            setSignInButton()
+        }
     }
 
-    private fun validateUnAuthorized(intent: Intent?) {
+    private fun validateUnAuthorized(intent: Intent?, showButton: (() -> Unit)? = null) {
         val isUnAuthorized = intent?.getBooleanExtra(UNAUTHORIZED, false)
         if (isUnAuthorized == true) {
             viewModel.deleteUserData()
             this.intent.putExtra(UNAUTHORIZED, false)
+            showButton?.invoke()
         }
     }
 

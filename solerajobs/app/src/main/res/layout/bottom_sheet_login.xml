@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -9,27 +10,34 @@
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
-            android:textAppearance="@style/Font.Semibold"
+            android:text="@string/solera_jobs"
             android:textAlignment="center"
+            android:textAppearance="@style/Font.Semibold"
             android:textSize="32sp"
-            android:text="@string/solera_jobs"/>
+            app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.gms.common.SignInButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignIn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="48dp"
-            android:layout_marginBottom="48dp"/>
+            android:layout_marginBottom="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            android:textAppearance="@style/Font.Semibold"
+            android:textSize="16sp"
+            android:background="@drawable/ic_button"
+            android:text="Continuar con Google"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

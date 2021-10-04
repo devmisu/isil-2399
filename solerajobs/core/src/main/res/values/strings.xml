@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
+    <string name="confirm_order">Confirmar servicio</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="select">Seleccionar</string>
+    <string name="exit">Salir</string>
+    <string name="unknown_error">Error desconocido.</string>
     <string name="network_error">Hay un problema de conexión. Por favor intente en unos minutos.</string>
     <string name="no_internet_connection_error">No cuenta con conexión a internet.</string>
     <string name="airplane_error">Desactivar el modo avión para continuar.</string>
+    <string name="want_to_leave_app_question">¿Quiere salir de la aplicación?</string>
+    <string name="cant_perform_operation">No es posible realizar la operación.</string>
+    <string name="unavailable">No disponible</string>
+    <string name="back">Regresar</string>
+    <!-- Biometric -->
+    <string name="can_authenticate">Correct</string>
+    <string name="authentication_error">Error de autenticación %1$s</string>
+    <string name="no_hardware">No cuenta con hardware de autenticación biometrica.</string>
+    <string name="no_fingerprints">No cuenta con huellas registradas.</string>
+    <string name="put_finger_to_continue">Coloque su huella para continuar.</string>
+    <!-- Third Party -->
+    <string name="no_whatsapp">No tienes Whatsapp instalado</string>
+    <string name="no_maps">No tienes Google Maps instalado</string>
+    <string name="start_nagivation">Iniciar navegación con</string>
+    <!-- App Only-->
     <string name="want_to_leave_app">¿Quiere salir de la aplicación?</string>
 
-    <string name="can_authenticate">Correct</string>
-    <string name="no_hardware">No cuenta con hardware de autenticación biometrica.</string>
-    <string name="unavailable">No es posible realizar la operación.</string>
-    <string name="no_fingerprints">No cuenta con huellas registradas.</string>
-    <string name="unknown_status">Error desconocido.</string>
-    <string name="authentication_error">Error de autenticación: %1$s</string>
-
     <string name="not_authorized">Ocurrió un problema con la validación de sesión.</string>
-
 </resources>
