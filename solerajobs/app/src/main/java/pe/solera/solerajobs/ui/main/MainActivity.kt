@@ -3,6 +3,7 @@ package pe.solera.solerajobs.ui.main
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.core.extension.addFragmentToNavigation
 import pe.solera.core.extension.moveBackToFirstFragment
 import pe.solera.core.extension.showMaterialDialog
@@ -12,6 +13,7 @@ import pe.solera.solerajobs.ui.BaseActivity
 import pe.solera.solerajobs.ui.HostFragment
 import pe.solera.solerajobs.ui.main.task.HostTaskListFragment
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private lateinit var binding : ActivityMainBinding

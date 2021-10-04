@@ -9,6 +9,8 @@ import pe.solera.repository.network.api.app.UserNetworkRepository
 import pe.solera.repository.network.api.app.UserNetworkImpl
 import pe.solera.repository.network.api.login.LoginNetworkImpl
 import pe.solera.repository.network.api.login.LoginNetworkRepository
+import pe.solera.repository.network.api.task.TaskNetworkImpl
+import pe.solera.repository.network.api.task.TaskNetworkRepository
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +28,11 @@ object NetworkModule {
     fun provideLoginNetwork(
         soleraJobsApi: SoleraJobsApi
     ) : LoginNetworkRepository = LoginNetworkImpl(soleraJobsApi)
+
+    @Singleton
+    @Provides
+    fun provideTaskNetwork(
+        soleraJobsApi: SoleraJobsApi
+    ) : TaskNetworkRepository = TaskNetworkImpl(soleraJobsApi)
 
 }
