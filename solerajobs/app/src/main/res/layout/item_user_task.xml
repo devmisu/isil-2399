@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="userTask"
+            type="pe.solera.entity.UserTask" />
+        <import type="pe.solera.solerajobs.ui.UtilKt"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_user_task"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProyect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textColor="@color/blue_light"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Proyecto"
+            android:text="@{userTask.projectName}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRequirement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvProyect"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textSize="16sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Transber Carga Aerea"
+            android:text="@{userTask.requirement}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHours"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvRequirement"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textSize="20sp"
+            android:maxLines="1"
+            tools:text="00 Horas"
+            android:text="@{UtilKt.setHoursOfTask(userTask.hours)}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

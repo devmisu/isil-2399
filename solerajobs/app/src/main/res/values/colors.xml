@@ -3,6 +3,7 @@
     <color name="background">#FFFFFFFF</color>
 
     <color name="blue">#2699fb</color>
+    <color name="blue_light">#bce0fd</color>
     <color name="skyblue">#bce0fd</color>
     <color name="skyblue_light">#f1f9ff</color>
     <color name="transparent">@android:color/transparent</color>
@@ -15,6 +16,8 @@
     <color name="bottom_nav_text_disabled">#bce0fd</color>
 
     <color name="button_bg">#FFFFFFFF</color>
+
+    <color name="user_task_stroke">#FFFFFFFF</color>
 
     <color name="text_main">#2699fb</color>
     <color name="text_secondary">#bce0fd</color>

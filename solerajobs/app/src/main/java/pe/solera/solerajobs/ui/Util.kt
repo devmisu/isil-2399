@@ -20,3 +20,7 @@ fun Context.validateException(ex: Exception, errorMessage: String.() -> Unit) {
         }
     }
 }
+
+fun setHoursOfTask(hours: Double) : String {
+    return "$hours Horas"
+}

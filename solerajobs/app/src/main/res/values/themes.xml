@@ -32,7 +32,7 @@
     <!--Font-->
     <style name="Font" parent="android:TextAppearance">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/blue</item>
+        <item name="android:textColor">@color/text_main</item>
         <item name="android:lineSpacingMultiplier">1.8</item>
     </style>
 

@@ -8,10 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import pe.solera.entity.UserTask
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentTaskListBinding
 import pe.solera.solerajobs.ui.validateException
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment() {
@@ -19,6 +21,8 @@ class TaskListFragment : Fragment() {
     private lateinit var binding : FragmentTaskListBinding
 
     private val viewModel : TaskViewModel by viewModels()
+
+    private lateinit var adapter : TaskListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +44,21 @@ class TaskListFragment : Fragment() {
         viewModel.userTaskEventLiveData.observe(viewLifecycleOwner) {
             when(it) {
                 is TaskListEventResult.UserTasksOfDay -> {
-                    println("LLEGARON LAS TAREAS")
+                    fillUserTaskRecyclerView(it.tasks)
                 }
                 is TaskListEventResult.Error -> requireActivity().validateException(it.ex) {
                     println(this)
                 }
             }
         }
+    }
+
+    private fun fillUserTaskRecyclerView(userTasks: ArrayList<UserTask>) {
+        if (this.binding.rcvUserTasks.adapter == null) {
+            this.adapter = TaskListAdapter()
+            this.binding.rcvUserTasks.adapter = this.adapter
+        }
+        this.adapter.items = userTasks
     }
 
 }
