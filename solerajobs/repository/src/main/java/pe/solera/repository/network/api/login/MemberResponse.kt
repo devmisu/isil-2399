@@ -3,9 +3,9 @@ package pe.solera.repository.network.api.login
 import com.google.gson.annotations.SerializedName
 
 data class MemberResponse(
-    @SerializedName("first_name")
+    @SerializedName("firstName")
     var firstName: String?,
-    @SerializedName("last_name")
+    @SerializedName("lastName")
     var lastName: String?,
     @SerializedName("document_number")
     var documentNumber: String?,

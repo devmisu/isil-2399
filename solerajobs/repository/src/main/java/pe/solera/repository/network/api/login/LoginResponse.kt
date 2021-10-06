@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
     @SerializedName("session")
     var session: SessionResponse?,
-    @SerializedName("member")
+    @SerializedName("user")
     var member: MemberResponse?
 )

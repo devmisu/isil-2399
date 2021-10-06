@@ -3,10 +3,20 @@ package pe.solera.solerajobs.ui.main.task.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import pe.solera.core.ConstantsCore
+import pe.solera.core.extension.capitalized
 import pe.solera.core.extension.launchOnIO
+import pe.solera.core.extension.toTextualDate
 import pe.solera.entity.UserTask
+import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import pe.solera.repository.network.api.task.TaskNetworkRepository
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -15,7 +25,8 @@ import kotlin.collections.ArrayList
 class TaskViewModel
 @Inject
 constructor(
-    private val taskNetworkRepository: TaskNetworkRepository
+    private val taskNetworkRepository: TaskNetworkRepository,
+    private val loginPreferencesRepository: LoginPreferencesRepository
 ): ViewModel() {
 
     private val userTaskEvent : MutableLiveData<TaskListEventResult> = MutableLiveData()
@@ -23,11 +34,29 @@ constructor(
 
     private var userTasksOfDay : ArrayList<UserTask> = ArrayList()
 
-    fun getUserTasksOfDay(date: Date) {
+    private var currentDaySelected: Date = Date()
+
+    private var changeDayJob : Job? = null
+
+    fun getUserInfoAndTasksOfDay() {
+        launchOnIO(
+            doTask = {
+                loginPreferencesRepository.getSavedUser()
+            },
+            result = {
+                userTaskEvent.value = TaskListEventResult.UserInfo(it)
+            },
+            error = {
+                userTaskEvent.value = TaskListEventResult.Error(it)
+            }
+        )
+    }
+
+    fun getUserTasksOfDay() {
         userTaskEvent.value = TaskListEventResult.Loading
         launchOnIO(
             doTask = {
-                taskNetworkRepository.getUserTasksOfDay(date)
+                taskNetworkRepository.getUserTasksOfDay(currentDaySelected)
             },
             result = {
                 userTasksOfDay = ArrayList(it)
@@ -39,4 +68,36 @@ constructor(
         )
     }
 
+    fun getTextualCurrentDay() : String {
+        val day = currentDaySelected.toTextualDate("EEEE").replace('.', ' ').trim().capitalized()
+        val numberDay = currentDaySelected.toTextualDate("dd")
+        val month = currentDaySelected.toTextualDate("MMMM").replace('.', ' ').trim().capitalized()
+        return "$day $numberDay de $month"
+    }
+
+    fun backDay() {
+        changeDayJob?.cancel()
+        changeDayJob = viewModelScope.launch {
+            delay(200)
+            if (isActive) {
+                val calendar = Calendar.getInstance()
+                calendar.time = currentDaySelected
+                calendar.add(Calendar.DATE, -1)
+                currentDaySelected = calendar.time
+                userTaskEvent.value = TaskListEventResult.CurrentDayModified(getTextualCurrentDay())
+                getUserTasksOfDay()
+            }
+        }
+    }
+    fun nextDay() {
+        changeDayJob?.cancel()
+        changeDayJob = viewModelScope.launch {
+            val calendar = Calendar.getInstance()
+            calendar.time = currentDaySelected
+            calendar.add(Calendar.DATE, 1)
+            currentDaySelected = calendar.time
+            userTaskEvent.value = TaskListEventResult.CurrentDayModified(getTextualCurrentDay())
+            getUserTasksOfDay()
+        }
+    }
 }

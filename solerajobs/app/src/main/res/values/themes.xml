@@ -29,6 +29,14 @@
         <item name="fontFamily">@font/font_medium</item>
     </style>
 
+    <style name="ProgressLoader" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_background</item>
+        <item name="android:indeterminateTint">?attr/colorPrimary</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="android:padding">8dp</item>
+        <item name="background">@color/transparent</item>
+    </style>
+
     <!--Font-->
     <style name="Font" parent="android:TextAppearance">
         <item name="android:textSize">12sp</item>

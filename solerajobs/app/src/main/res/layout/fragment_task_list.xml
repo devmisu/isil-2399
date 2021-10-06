@@ -7,6 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
+
+        <include
+            android:id="@+id/rlyProgress"
+            layout="@layout/layout_loader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/rcvUserTasks"
+            app:layout_constraintStart_toStartOf="@id/rcvUserTasks"
+            app:layout_constraintEnd_toEndOf="@id/rcvUserTasks"
+            app:layout_constraintBottom_toBottomOf="@id/rcvUserTasks"
+            android:visibility="visible"
+            tools:visibility="gone"/>
         
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvUserName"
@@ -20,6 +32,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:textSize="20sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             tools:text="Ernesto Gaspard" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -47,6 +61,8 @@
             android:textAppearance="@style/Font.Semibold"
             android:gravity="center"
             android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             tools:text="Lunes 22 de Junio"/>
 
         <androidx.appcompat.widget.AppCompatImageButton

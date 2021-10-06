@@ -12,7 +12,6 @@ import pe.solera.entity.UserTask
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentTaskListBinding
 import pe.solera.solerajobs.ui.validateException
-import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -23,6 +22,8 @@ class TaskListFragment : Fragment() {
     private val viewModel : TaskViewModel by viewModels()
 
     private lateinit var adapter : TaskListAdapter
+
+    private var isLoading: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,15 +37,30 @@ class TaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserTasksOfDay(Date())
+        binding.tvDateSelected.text = viewModel.getTextualCurrentDay()
+        viewModel.getUserInfoAndTasksOfDay()
+        setupBackDay()
+        setupNextDay()
         observeViewModel()
     }
 
     private fun observeViewModel() {
         viewModel.userTaskEventLiveData.observe(viewLifecycleOwner) {
+            this.isLoading = it.isLoading
             when(it) {
+                is TaskListEventResult.UserInfo -> {
+                    binding.tvUserName.text = "${it.user.name} ${it.user.lastName}"
+                    viewModel.getUserTasksOfDay()
+                }
+                is TaskListEventResult.CurrentDayModified -> {
+                    binding.tvDateSelected.text = it.day
+                }
                 is TaskListEventResult.UserTasksOfDay -> {
                     fillUserTaskRecyclerView(it.tasks)
+                    hideListLoader()
+                }
+                TaskListEventResult.Loading -> {
+                    showListLoader()
                 }
                 is TaskListEventResult.Error -> requireActivity().validateException(it.ex) {
                     println(this)
@@ -59,6 +75,30 @@ class TaskListFragment : Fragment() {
             this.binding.rcvUserTasks.adapter = this.adapter
         }
         this.adapter.items = userTasks
+    }
+
+    private fun showListLoader() {
+        binding.rlyProgress.ctrLoader.visibility = View.VISIBLE
+    }
+
+    private fun hideListLoader() {
+        binding.rlyProgress.ctrLoader.visibility = View.GONE
+    }
+
+    private fun setupBackDay() {
+        binding.btnBackDate.setOnClickListener {
+            if (!isLoading) {
+                viewModel.backDay()
+            }
+        }
+    }
+
+    private fun setupNextDay() {
+        binding.btnNextDate.setOnClickListener {
+            if (!isLoading) {
+                viewModel.nextDay()
+            }
+        }
     }
 
 }

@@ -1,9 +1,11 @@
 package pe.solera.repository.network.api.task
 
+import pe.solera.core.ConstantsCore
 import pe.solera.core.EventResult
 import pe.solera.entity.UserTask
 import pe.solera.repository.network.api.SoleraJobsApi
 import pe.solera.repository.util.validateResponse
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -13,7 +15,8 @@ class TaskNetworkImpl(
 ) : TaskNetworkRepository {
 
     override suspend fun getUserTasksOfDay(date: Date): EventResult<List<UserTask>> {
-        val response = soleraJobsApi.getUserTasks("2021-10-3")
+        val formatter = SimpleDateFormat("YYYY-MM-dd", ConstantsCore.Locale.Spanish)
+        val response = soleraJobsApi.getUserTasks(formatter.format(date))
         return suspendCoroutine { continuation ->
             response.validateResponse(
                 success = {

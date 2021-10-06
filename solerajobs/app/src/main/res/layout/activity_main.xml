@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Widget.BottomNavigationView"
             app:itemHorizontalTranslationEnabled="false"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:itemRippleColor="@color/skyblue"
             app:itemTextColor="@color/bottom_nav_selector_text"
             app:itemIconTint="@color/bottom_nav_selector_text"
