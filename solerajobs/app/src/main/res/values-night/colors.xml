@@ -16,10 +16,12 @@
     <color name="bottom_nav_text_disabled">#bce0fd</color>
 
     <color name="button_bg">#FF000000</color>
+    <color name="button_bg_secondary">#FF000000</color>
 
     <color name="user_task_stroke">#2699fb</color>
 
     <color name="text_main">#2699fb</color>
+    <color name="text_main_secondary">#2699fb</color>
     <color name="text_secondary">#bce0fd</color>
     <color name="text_light">#f1f9ff</color>
 
