@@ -103,7 +103,7 @@ routes.get('/member/:id_member/requirement/:id_requirement', (req, res) => {
 
 routes.put('/member/:id_member/requirement/:id_requirement', (req, res) => {
 
-    const { result, devMessage } = util.sanitize(req.body, ['estimate_start_date', 'estimate_end_date', 'estimate_hours', 'real_hours'])
+    const { result, devMessage } = util.sanitize(req.body, ['estimate_start_date', 'estimate_end_date', 'estimate_hours'])
 
     if (!result) {
         return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })

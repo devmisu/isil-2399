@@ -26,7 +26,9 @@ const getConnection = async function (req) {
 
 const execQuery = async function (conn, query, params) {
     return new Promise((resolve, reject) => {
-        conn.query('CALL ' + query + '(?)', [params], (err, rows) => {
+        var exec = 'CALL ' + query
+        if (params) exec += '(?)'
+        conn.query( exec, [params], (err, rows) => {
             if (err) {
                 reject(err)
             } else {
