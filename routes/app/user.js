@@ -56,32 +56,40 @@ routes.post('/login', (req, res) => {
 })
 
 // Get current requirements
-routes.get('/requirements', auth, (req, res) => {
+routes.get('/requirements', auth, async (req, res) => {
 
-    const { result, devMessage } = util.sanitize(req.query, ['date'])
+    try {
 
-    if (!result) {
-        return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })
-    }
+        const { result, devMessage } = util.sanitize(req.query, ['date'])
 
-    const params = [
-        req.user.email,
-        req.query['date']
-    ]
+        if (!result) {
+            return res.status(400).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })
+        }
 
-    req.getConnection((err, conn) => {
+        const params = [
+            req.user.email,
+            req.query['date']
+        ]
 
-        if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err })
+        const conn = await util.getConnection(req)
 
-        conn.query('CALL get_current_requirements(?)', [params], (err, rows) => {
+        const promises = [
+            util.execQuery(conn, 'get_worked_hours', params),
+            util.execQuery(conn, 'get_current_requirements', params)
+        ]
 
-            if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] })
+        Promise.all(promises).then(results => {
+            
+            const workedHours = results[0][0].workedHours
+            const requirements = results[1]
 
-            if (rows[0] == null) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: 'El usuario no existe en la base de datos.' })
-
-            res.json(rows[0])
+            res.json({ workedHours, requirements })
         })
-    })
+        
+    } catch (err) {
+
+        res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] ?? err })
+    }
 })
 
 module.exports = routes
