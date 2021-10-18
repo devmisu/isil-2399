@@ -37,7 +37,7 @@ routes.post('/login', (req, res) => {
 
             if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err })
 
-            conn.query('CALL get_member_info(?)', [email], (err, rows) => {
+            conn.query('CALL app_get_member_info(?)', [email], (err, rows) => {
 
                 if (err) return res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] })
 
@@ -73,18 +73,39 @@ routes.get('/requirements', auth, async (req, res) => {
 
         const conn = await util.getConnection(req)
 
-        const promises = [
-            util.execQuery(conn, 'get_worked_hours', params),
-            util.execQuery(conn, 'get_current_requirements', params)
-        ]
+        Promise.all([
 
-        Promise.all(promises).then(results => {
-            
+            util.execQuery(conn, 'app_get_worked_hours', params),
+            util.execQuery(conn, 'app_get_current_requirements', params)
+
+        ]).then(results => {
+
             const workedHours = results[0][0].workedHours
             const requirements = results[1]
 
             res.json({ workedHours, requirements })
         })
+        
+    } catch (err) {
+
+        res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] ?? err })
+    }
+})
+
+// Get requirement detail
+routes.get('/requirements/:id', auth, async (req, res) => {
+
+    try {
+
+        const params = [
+            req.user.email,
+            req.params.id
+        ]
+
+        const conn = await util.getConnection(req)
+        const requirementDetail = await util.execQuery(conn, 'app_get_requirement_detail', params);
+
+        res.json(requirementDetail[0])
         
     } catch (err) {
 
