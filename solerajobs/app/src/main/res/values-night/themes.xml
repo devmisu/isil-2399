@@ -32,7 +32,7 @@
 
     <style name="ProgressLoader" parent="Widget.AppCompat.ProgressBar">
         <item name="android:indeterminateDrawable">@drawable/progress_background</item>
-        <item name="android:indeterminateTint">?attr/colorPrimary</item>
+        <item name="android:indeterminateTint">@color/text_secondary</item>
         <item name="android:outlineProvider">none</item>
         <item name="android:padding">8dp</item>
         <item name="background">@color/transparent</item>

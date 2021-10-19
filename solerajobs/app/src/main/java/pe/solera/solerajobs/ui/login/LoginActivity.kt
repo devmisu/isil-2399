@@ -83,6 +83,7 @@ class LoginActivity : BaseActivity() {
         val isUnAuthorized = intent?.getBooleanExtra(UNAUTHORIZED, false)
         if (isUnAuthorized == true) {
             viewModel.deleteUserData()
+            googleSignInClient.signOut()
             this.intent.putExtra(UNAUTHORIZED, false)
             showButton?.invoke()
         }

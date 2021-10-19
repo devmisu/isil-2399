@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/rlyProgress"
+            layout="@layout/layout_loader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            tools:visibility="gone"/>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnCreateOrEdit"
+            android:layout_marginBottom="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctrTaskInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/bg_with_border_without_ripple"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="@+id/tvEndDate"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="12dp"
+                        android:textAppearance="@style/Font.Regular"
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Inicio: 18/10/2021" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/Font.Regular"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/tvStartDate"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:textAlignment="textEnd"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Fin: 20/10/2021" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvClientName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvStartDate"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:textAppearance="@style/Font.Regular"
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Cliente: Diners Club Perú" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProjectName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/Font.Regular"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@id/tvClientName"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Proyecto: R3 - Biometría y Otros" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProjectManager"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/Font.Regular"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@id/tvProjectName"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Manager: Miguel Pérez" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProjectTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ctrTaskInfo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Proyecto"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProjectSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvProjectTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    tools:text="Transber Carga Aérea - Proyecto"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHourTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvProjectSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Horas"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHourSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvHourTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    tools:text="08:00"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCommentTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvHourSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Comentario"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvCommentTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/bg_with_border_without_ripple"
+                    android:paddingTop="8dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    style="@style/Font.Regular"
+                    android:textSize="14sp"
+                    android:minHeight="48dp"
+                    android:minLines="4"
+                    android:maxLines="4"
+                    tools:text="Transber Carga Aérea - Proyecto Transber Carga Aérea - ProyectoTransber Carga Aérea - Proyecto Transber "/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreateOrEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textColor="@color/text_main_secondary"
+            android:textSize="16sp"
+            android:background="@drawable/bg_with_border_secondary"
+            android:text="Agregar / Guardar"/>
+
+        <ProgressBar
+            android:id="@+id/progressSave"
+            style="@style/ProgressLoader"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@color/transparent"
+            android:elevation="4dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/btnCreateOrEdit"
+            app:layout_constraintEnd_toEndOf="@id/btnCreateOrEdit"
+            app:layout_constraintBottom_toBottomOf="@id/btnCreateOrEdit"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

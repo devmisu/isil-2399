@@ -9,14 +9,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import pe.solera.core.ConstantsCore
 import pe.solera.core.extension.capitalized
 import pe.solera.core.extension.launchOnIO
 import pe.solera.core.extension.toTextualDate
 import pe.solera.entity.UserTask
 import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import pe.solera.repository.network.api.task.TaskNetworkRepository
-import java.text.SimpleDateFormat
+import pe.solera.solerajobs.ui.convertToHoursOfTask
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -59,8 +58,11 @@ constructor(
                 taskNetworkRepository.getUserTasksOfDay(currentDaySelected)
             },
             result = {
-                userTasksOfDay = ArrayList(it)
-                userTaskEvent.value = TaskListEventResult.UserTasksOfDay(userTasksOfDay)
+                userTasksOfDay = ArrayList(it.requirements)
+                userTaskEvent.value = TaskListEventResult.UserTasksOfDayAndTotalHours(
+                    convertToHoursOfTask(it.workedHours),
+                    userTasksOfDay
+                )
             },
             error = {
                 userTaskEvent.value = TaskListEventResult.Error(it)

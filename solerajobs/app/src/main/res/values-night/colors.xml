@@ -25,6 +25,11 @@
     <color name="text_secondary">#bce0fd</color>
     <color name="text_light">#f1f9ff</color>
 
+    <color name="total_hours_background">#FF000000</color>
+
+    <color name="delete">#cc0000</color>
+    <color name="text_delete">#FFFFFFFF</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

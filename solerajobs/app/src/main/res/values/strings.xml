@@ -10,4 +10,20 @@
     <string name="nav_stadistics">Estadisticas</string>
     <string name="nav_config">Configuración</string>
 
+    <string name="total_hours">Trabajado: %1$s</string>
+
+    <string name="start_date"><b>Inicio:</b> %1$s</string>
+    <string name="end_date"><b>Fin:</b> %1$s</string>
+    <string name="client_name"><b>Cliente:</b> %1$s</string>
+    <string name="project_name"><b>Proyecto:</b> %1$s</string>
+    <string name="project_manager_name"><b>Manager:</b> %1$s</string>
+
+    <string name="create_task_title">Crear registro</string>
+    <string name="edit_task_title">Editar registro</string>
+
+    <string name="save">Guardar</string>
+    <string name="edit">Editar</string>
+    <string name="create">Crear</string>
+    <string name="delete">Eliminar</string>
+
 </resources>

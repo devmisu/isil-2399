@@ -1,5 +1,6 @@
 package pe.solera.solerajobs.ui.main.task.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.entity.UserTask
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentTaskListBinding
+import pe.solera.solerajobs.ui.main.task.detail.TaskDetailActivity
+import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel
+import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel.Companion.USER_TASK_ID
 import pe.solera.solerajobs.ui.validateException
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class TaskListFragment : Fragment() {
+class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
 
     private lateinit var binding : FragmentTaskListBinding
 
@@ -41,6 +44,7 @@ class TaskListFragment : Fragment() {
         viewModel.getUserInfoAndTasksOfDay()
         setupBackDay()
         setupNextDay()
+        setupAddTaskButton()
         observeViewModel()
     }
 
@@ -55,7 +59,8 @@ class TaskListFragment : Fragment() {
                 is TaskListEventResult.CurrentDayModified -> {
                     binding.tvDateSelected.text = it.day
                 }
-                is TaskListEventResult.UserTasksOfDay -> {
+                is TaskListEventResult.UserTasksOfDayAndTotalHours -> {
+                    setTotalHoursOfDay(it.totalHours)
                     fillUserTaskRecyclerView(it.tasks)
                     hideListLoader()
                 }
@@ -69,11 +74,16 @@ class TaskListFragment : Fragment() {
         }
     }
 
+    private fun setTotalHoursOfDay(total: String) {
+        binding.tvTotalHoursOfDay.text = getString(R.string.total_hours, total)
+    }
+
     private fun fillUserTaskRecyclerView(userTasks: ArrayList<UserTask>) {
         if (this.binding.rcvUserTasks.adapter == null) {
             this.adapter = TaskListAdapter()
             this.binding.rcvUserTasks.adapter = this.adapter
         }
+        this.adapter.listener = this
         this.adapter.items = userTasks
     }
 
@@ -101,4 +111,19 @@ class TaskListFragment : Fragment() {
         }
     }
 
+    private fun setupAddTaskButton() {
+        binding.btnCreateTask.setOnClickListener {
+            startActivity(Intent(requireActivity(), TaskDetailActivity::class.java).apply {
+                putExtra(USER_TASK_ID, TaskDetailViewModel.NEW_USER_TASK_ID)
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
+            })
+        }
+    }
+
+    override fun taskClicked(id: Int) {
+        startActivity(Intent(requireActivity(), TaskDetailActivity::class.java).apply {
+            putExtra(USER_TASK_ID, id)
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
+        })
+    }
 }

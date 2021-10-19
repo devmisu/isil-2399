@@ -30,3 +30,36 @@ fun Context.showMaterialDialog(
         builder.show()
     }
 }
+
+fun Context.showMaterialDialogWithOptions(
+    itemNames: Array<String>,
+    title: String = String(),
+    titleId: Int? = null,
+    showNegativeButton: Boolean = false,
+    previousSelectedItemIndex: Int = -1,
+    selection: (index:Int, name: String, action: Boolean) -> Unit
+) : AlertDialog {
+
+    var selectedItemIndex : Int = previousSelectedItemIndex
+
+    return MaterialAlertDialogBuilder(this).let { builder ->
+        builder.setCancelable(false)
+        builder.setTitle(if (titleId != null) getText(titleId) else title)
+        builder.setSingleChoiceItems(itemNames, selectedItemIndex) { _, checkedItem ->
+            selectedItemIndex = checkedItem
+        }
+        builder.setPositiveButton(this.getText(R.string.select)) { dialog, _ ->
+            if (selectedItemIndex >= 0) {
+                selection(selectedItemIndex, itemNames[selectedItemIndex], true)
+                dialog.dismiss()
+            }
+        }
+        if (showNegativeButton) {
+            builder.setNegativeButton(this.getText(R.string.cancel)) { dialog, _ ->
+                selection(selectedItemIndex, String(), false)
+                dialog.dismiss()
+            }
+        }
+        builder.show()
+    }
+}

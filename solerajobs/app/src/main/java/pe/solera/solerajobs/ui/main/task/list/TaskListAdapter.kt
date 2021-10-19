@@ -20,6 +20,12 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
             diffResult.dispatchUpdatesTo(this)
         }
 
+    var listener : TaskListListener? = null
+
+    interface TaskListListener {
+        fun taskClicked(id: Int)
+    }
+
     override fun getItemCount(): Int = this.items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -29,7 +35,8 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
                 R.layout.item_user_task,
                 parent,
                 false
-            )
+            ),
+            listener
         )
     }
 
@@ -56,11 +63,15 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     }
 
     inner class TaskViewHolder(
-        private val viewBinding: ItemUserTaskBinding
+        private val viewBinding: ItemUserTaskBinding,
+        private val listener: TaskListListener?
     ) : RecyclerView.ViewHolder(viewBinding.root) {
 
         fun bindView(userTask: UserTask) {
             viewBinding.userTask = userTask
+            viewBinding.ctrTaskItem.setOnClickListener {
+                listener?.taskClicked(userTask.id)
+            }
         }
 
     }

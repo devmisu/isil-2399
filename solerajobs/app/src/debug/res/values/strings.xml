@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="base_url">http://34.239.115.169:9000/api/</string>
+    <string name="base_url">http://34.239.115.169:9000/api/app/</string>
     <string name="encryptPass">%S0l3R4J0BS@</string>
 </resources>

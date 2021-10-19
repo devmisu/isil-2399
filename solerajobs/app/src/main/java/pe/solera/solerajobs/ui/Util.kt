@@ -21,6 +21,7 @@ fun Context.validateException(ex: Exception, errorMessage: String.() -> Unit) {
     }
 }
 
-fun setHoursOfTask(hours: Double) : String {
-    return "$hours Horas"
+fun convertToHoursOfTask(hours: Double) : String {
+    val quantity : String = if (hours > 1) "Horas" else "Hora"
+    return "${hours.toInt()}:00 $quantity"
 }
