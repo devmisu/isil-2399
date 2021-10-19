@@ -26,4 +26,11 @@
     <string name="create">Crear</string>
     <string name="delete">Eliminar</string>
 
+    <string name="select_client">Seleccione un cliente</string>
+    <string name="select_project">Seleccione un proyecto</string>
+    <string name="select_requirement">Seleccione un requerimiento</string>
+    <string name="select_date">Seleccione fecha</string>
+    <string name="select_hours">Seleccione horas</string>
+    <string name="insert_comment">Agregue un comentario</string>
+
 </resources>

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.core.extension.showMaterialDialog
 import pe.solera.core.extension.showMaterialDialogWithOptions
@@ -83,7 +82,6 @@ class EditTaskFragment : BaseFragment() {
     }
 
     private fun setupProjectSelector(userTask: UserTask) {
-        binding.tvProjectSelector.isEnabled = viewModel.isNewTask
         binding.tvProjectSelector.text = userTask.projectName
     }
 

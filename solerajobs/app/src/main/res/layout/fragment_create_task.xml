@@ -1,9 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnCreate"
+            android:layout_marginBottom="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClientTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Cliente"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClientSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvClientTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    android:text="@string/select_client"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProjectTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvClientSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Proyecto"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProjectSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvProjectTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    android:text="@string/select_project"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRequirementTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvProjectSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Requerimiento"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRequirementSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequirementTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    android:text="@string/select_requirement"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDateTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequirementSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Fecha"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDateSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvDateTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    android:text="@string/select_date"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHourTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvDateSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Horas"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHourSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvHourTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_with_border"
+                    android:drawableEnd="@drawable/ic_arrow_dropdown"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="start|center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    app:drawableTint="@color/blue"
+                    android:textAppearance="@style/Font.Regular"
+                    android:text="@string/select_hours"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCommentTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvHourSelector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Comentario"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/Font.Semibold"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvCommentTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/bg_with_border_without_ripple"
+                    android:paddingTop="8dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    style="@style/Font.Regular"
+                    android:textColorHint="@color/text_main"
+                    android:textSize="14sp"
+                    android:minHeight="48dp"
+                    android:minLines="4"
+                    android:maxLines="4"
+                    android:hint="@string/insert_comment"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textColor="@color/text_main_secondary"
+            android:textSize="16sp"
+            android:background="@drawable/bg_with_border_secondary"
+            android:text="@string/create"/>
+
+        <ProgressBar
+            android:id="@+id/progressSave"
+            style="@style/ProgressLoader"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@color/transparent"
+            android:elevation="4dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/btnCreate"
+            app:layout_constraintEnd_toEndOf="@id/btnCreate"
+            app:layout_constraintBottom_toBottomOf="@id/btnCreate"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

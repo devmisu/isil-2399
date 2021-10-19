@@ -95,6 +95,7 @@ object ConstantsCore {
     object DatePattern {
         const val ddMMyyyy_slashes = "dd/MM/yyyy"
         const val ddMMyyyy = "dd-MM-yyyy"
+        const val yyyyMMdd = "yyyy-MM-dd"
         const val dayAndMonth = "dd MMMM"
         const val dayAndMonthShort = "dd MMM"
         const val dayMonthYear = "dd MMMM yyyy"

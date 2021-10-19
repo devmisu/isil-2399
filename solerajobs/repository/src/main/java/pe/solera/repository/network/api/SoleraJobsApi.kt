@@ -3,9 +3,7 @@ package pe.solera.repository.network.api
 import pe.solera.repository.network.api.app.UserResponse
 import pe.solera.repository.network.api.login.LoginRequest
 import pe.solera.repository.network.api.login.LoginResponse
-import pe.solera.repository.network.api.task.UserTaskRequest
-import pe.solera.repository.network.api.task.UserTaskResponse
-import pe.solera.repository.network.api.task.WorkedDayResponse
+import pe.solera.repository.network.api.task.*
 import pe.solera.repository.network.model.BaseResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -30,4 +28,14 @@ interface SoleraJobsApi {
         @Body request: UserTaskRequest
     ) : Response<Void>
 
+    @GET("list")
+    suspend fun getTaskIdentfierList(
+        @Query("id") id: String,
+        @Query("parent") parent: Int
+    ) : Response<List<TaskIdentifierResponse>>
+
+    @POST("requirements")
+    suspend fun createTask(
+        @Body request: UserTaskCreationRequest
+    ) : Response<Void>
 }

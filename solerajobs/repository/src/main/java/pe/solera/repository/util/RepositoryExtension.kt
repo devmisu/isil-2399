@@ -10,7 +10,7 @@ fun <T> Response<T>?.validateResponse(success: (T) -> Unit, error: (IOException)
             nonNullResponse.body()?.let { correctBody ->
                 success(correctBody)
             } ?: kotlin.run {
-                if (nonNullResponse.code() == 200 ) {
+                if (nonNullResponse.code() == 200 || nonNullResponse.code() == 201) {
                     successWithoutBody?.invoke()
                 } else {
                     error(NullPointerException())

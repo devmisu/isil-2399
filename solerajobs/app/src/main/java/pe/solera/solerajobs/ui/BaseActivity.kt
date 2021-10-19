@@ -19,8 +19,7 @@ open class BaseActivity : AppCompatActivity() {
             is BaseException.UnAuthorizeException -> {
                 startActivity(Intent(this, LoginActivity::class.java).apply {
                     putExtra(UNAUTHORIZED, true)
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
                 })
             }
             else -> {

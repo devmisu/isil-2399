@@ -167,6 +167,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textSize="14sp"
+                    android:enabled="false"
                     app:drawableTint="@color/blue"
                     android:textAppearance="@style/Font.Regular"
                     tools:text="Transber Carga Aérea - Proyecto"/>
@@ -208,7 +209,7 @@
                     android:textSize="14sp"
                     app:drawableTint="@color/blue"
                     android:textAppearance="@style/Font.Regular"
-                    tools:text="08:00"/>
+                    android:text="@string/select_hours"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCommentTitle"
