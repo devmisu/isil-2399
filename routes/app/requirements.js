@@ -126,4 +126,27 @@ routes.put('/:id', auth, async (req, res) => {
     }
 })
 
+// Delete requirement
+routes.delete('/:id', auth, async (req, res) => {
+
+    try {
+
+        const conn = await util.getConnection(req)
+        const member = await util.execQuery(conn, 'get_member_by_email', [req.user.email])
+
+        const params = [
+            member[0].id,
+            req.params.id
+        ]
+
+        await util.execQuery(conn, 'app_delete_requirement', params)
+    
+        res.json()
+
+    } catch (err) {
+
+        res.status(500).json({ message: 'Ocurrio un error inesperado.', devMessage: err['sqlMessage'] ?? err })
+    }
+})
+
 module.exports = routes
