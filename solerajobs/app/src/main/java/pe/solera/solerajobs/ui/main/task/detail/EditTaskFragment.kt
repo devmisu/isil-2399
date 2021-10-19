@@ -51,6 +51,7 @@ class EditTaskFragment : BaseFragment() {
                     setupHourSelector()
                     setupCommentInput()
                     setupCreateOrEditButton()
+                    setupDeleteButton()
                 }
                 is TaskDetailEventResult.Error -> requireActivity().validateException(it.ex) {
                     binding.progressSave.visibility = View.GONE
@@ -61,8 +62,12 @@ class EditTaskFragment : BaseFragment() {
                 TaskDetailEventResult.LoadingEdition -> {
                     binding.progressSave.visibility = View.VISIBLE
                 }
+                TaskDetailEventResult.LoadingDelete -> {
+                    binding.progressDelete.visibility = View.VISIBLE
+                }
                 TaskDetailEventResult.SuccessEdition -> {
                     binding.progressSave.visibility = View.GONE
+                    binding.progressDelete.visibility = View.GONE
                     requireActivity().finish()
                 }
             }
@@ -112,7 +117,17 @@ class EditTaskFragment : BaseFragment() {
     private fun setupCreateOrEditButton() {
         binding.btnCreateOrEdit.text = getString(R.string.edit)
         binding.btnCreateOrEdit.setOnClickListener {
-            viewModel.editTaskDetail()
+            if (!isLoading) {
+                viewModel.editTaskDetail()
+            }
+        }
+    }
+
+    private fun setupDeleteButton() {
+        binding.btnDelete.setOnClickListener {
+            if (!isLoading) {
+                viewModel.deleteTask()
+            }
         }
     }
 }

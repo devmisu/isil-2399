@@ -18,4 +18,6 @@ interface TaskNetworkRepository {
 
     suspend fun createTask(userTask: UserTask) : EventResult<Boolean>
 
+    suspend fun deleteTask(id: Int) : EventResult<Boolean>
+
 }

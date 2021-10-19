@@ -38,4 +38,9 @@ interface SoleraJobsApi {
     suspend fun createTask(
         @Body request: UserTaskCreationRequest
     ) : Response<Void>
+
+    @DELETE("requirements/{id}")
+    suspend fun deleteTask(
+        @Path("id") taskId: Int
+    ) : Response<Void>
 }

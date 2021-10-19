@@ -170,4 +170,19 @@ constructor(
             else -> valid()
         }
     }
+
+    fun deleteTask() {
+        taskDetailEvent.value = TaskDetailEventResult.LoadingDelete
+        launchOnIO(
+            doTask = {
+                taskNetworkRepository.deleteTask(userTask.id)
+            },
+            result = {
+                taskDetailEvent.value = TaskDetailEventResult.SuccessEdition
+            },
+            error = {
+                taskDetailEvent.value = TaskDetailEventResult.Error(it)
+            }
+        )
+    }
 }

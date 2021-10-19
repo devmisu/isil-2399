@@ -108,4 +108,21 @@ class TaskNetworkImpl(
             )
         }
     }
+
+    override suspend fun deleteTask(id: Int): EventResult<Boolean> {
+        val response = soleraJobsApi.deleteTask(id)
+        return suspendCoroutine { continuation ->
+            response.validateResponse(
+                success = {
+                    continuation.resume(EventResult.Success(true))
+                },
+                error = {
+                    continuation.resume(EventResult.Error(it))
+                },
+                successWithoutBody = {
+                    continuation.resume(EventResult.Success(true))
+                }
+            )
+        }
+    }
 }
