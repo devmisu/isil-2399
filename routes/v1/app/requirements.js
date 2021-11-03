@@ -2,8 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const routes = express.Router()
 const jwt = require('jsonwebtoken');
-const util = require('../../common/util')
-const auth = require('../../middlewares/auth')
+const util = require('../../../common/util')
+const auth = require('../../../middlewares/auth')
 
 // Get requirements by date
 routes.get('/', auth, async (req, res) => {
