@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.send('Solera Jobs!')
 })
 
-// app.use('/api', require('./routes/routes'))
+app.use('/api', require('./routes'))
 
 // Error logger
 // if (process.env.NODE_ENV == 'development') {
