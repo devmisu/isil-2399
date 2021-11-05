@@ -5,4 +5,6 @@ routes.get('/', (req, res) => {
     res.send('crud')
 })
 
+routes.use('/client', require('./client'))
+
 module.exports = routes
