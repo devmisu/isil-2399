@@ -1,25 +1,26 @@
-require('dotenv').config()
-const jwt = require('jsonwebtoken')
-const util = require('../common/util')
+const jwt = require('../common/jwt')
+const validator = require('../common/validator')
 
-const verifyToken = (req, res, next) => {
+module.exports = {
 
-    const { result, devMessage } = util.sanitize(req.headers, ['authorization'])
+    verifyToken (req, res, next) {
 
-    if (!result) {
-        return res.status(403).json({ message: 'Ocurrio un error inesperado.', devMessage: devMessage })
+        try {
+
+            const { result, devMessage } = validator.valid(req.headers, ['authorization'])
+
+            if (!result) throw devMessage
+        
+            const authorization = req.headers['authorization'].split(' ')
+            const token = authorization[1]
+        
+            req.user = jwt.verify(token)
+        
+            return next()   
+
+        } catch(error) {
+
+            return res.status(401).json({ message: error })
+        }
     }
-
-    const authorization = req.headers['authorization'].split(' ')
-    const token = authorization[1]
-
-    try {
-        req.user = jwt.verify(token, process.env.JWT_SECRET_KEY)
-    } catch (err) {
-        return res.status(401).json({ message: 'Lo sentimos, su sesion a expirado.', devMessage: err })
-    }
-
-    return next()
 }
-
-module.exports = verifyToken
