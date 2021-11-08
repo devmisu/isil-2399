@@ -16,7 +16,7 @@ module.exports = {
 
         } catch(error) {
 
-            throw error || 'Credenciales invalidas.'
+            throw 'Credenciales invalidas.'
         }
     }
 }
