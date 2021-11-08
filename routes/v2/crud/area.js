@@ -108,7 +108,7 @@ routes.delete('/:id', async (req, res) => {
 
         if (area == null) { throw 'No se encontro area.' }
 
-        area = await client.destroy()
+        area = await area.destroy()
 
         await AreaLog.create({
             areaId: area.id,
