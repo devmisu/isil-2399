@@ -1,6 +1,6 @@
 const express = require('express')
 const routes = express.Router()
-const util = require('../../common/util')
+const util = require('../../../common/util')
 
 // Create
 routes.post('/', (req, res) => {
