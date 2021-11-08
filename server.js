@@ -9,14 +9,14 @@ const app = express()
 app.use(express.json())
 
 // Logger
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.simple(),
-    requestWhitelist: ['headers', 'body'],
-    responseWhitelist: ['body']
-}))
+// app.use(expressWinston.logger({
+//     transports: [
+//         new winston.transports.Console()
+//     ],
+//     format: winston.format.simple(),
+//     requestWhitelist: ['headers', 'body'],
+//     responseWhitelist: ['body']
+// }))
 
 // Routes
 app.get('/', (req, res) => {

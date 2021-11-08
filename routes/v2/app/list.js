@@ -42,7 +42,12 @@ routes.get('/', auth, async (req, res) => {
                 throw 'id invalido.'
         }
 
-        res.json(list)
+        res.json(list.map((obj) => {
+            return {
+                id: obj.id,
+                name: obj.name
+            }
+        }))
 
     } catch(error) {
 
