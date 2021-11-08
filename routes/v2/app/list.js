@@ -14,23 +14,35 @@ routes.get('/', auth, async (req, res) => {
 
         if (!result) throw devMessage
         
+        var list;
+
         switch (req.query['id']) {
 
             case 'client':
-                res.json(await Client.findAll())
+                list = await Client.findAll()
                 break
 
             case 'project':
-                res.json(await Project.findAll({ where: { clientId: req.query['parent'] } }))
+                if (validator.valid(req.query, ['parent']).result) {
+                    list = await Project.findAll({ where: { clientId: req.query['parent'] } })
+                } else {
+                    list = await Project.findAll()
+                }
                 break
 
             case 'requirement':
-                res.json(await Requirement.findAll({ where: { projectId: req.query['parent'] } }))
+                if (validator.valid(req.query, ['parent']).result) {
+                    list = await Requirement.findAll({ where: { projectId: req.query['parent'] } })
+                } else {
+                    list = await Requirement.findAll()
+                }
                 break
 
             default:
                 throw 'id invalido.'
         }
+
+        res.json(list)
 
     } catch(error) {
 
