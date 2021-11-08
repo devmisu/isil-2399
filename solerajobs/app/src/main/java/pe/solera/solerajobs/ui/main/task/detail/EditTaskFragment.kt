@@ -87,7 +87,7 @@ class EditTaskFragment : BaseFragment() {
     }
 
     private fun setupProjectSelector(userTask: UserTask) {
-        binding.tvProjectSelector.text = userTask.projectName
+        binding.tvProjectSelector.text = userTask.requirementDescription
     }
 
     private fun setupHourSelector() {

@@ -23,7 +23,7 @@ class TaskDetailActivity : BaseActivity() {
         viewModel.userTask.id = intent.getIntExtra(USER_TASK_ID, NEW_USER_TASK_ID)
         viewModel.isNewTask = viewModel.userTask.id == NEW_USER_TASK_ID
         setContentView(binding.root)
-        binding.tvTitle.text = getString(R.string.edit_task_title)
+        binding.tvTitle.text = getString(if (viewModel.isNewTask) R.string.create_task_title else R.string.edit_task_title)
         setFragmentToBeShown()
         setBackButton()
     }
