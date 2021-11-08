@@ -1,9 +1,18 @@
 # isil-2399
-ISIL Proyecto Tecnologico 2021-2
+
+![ISIL-2021-2](https://img.shields.io/badge/-ISIL--2021--2-blue)
+![.NODEJS](https://img.shields.io/badge/-NodeJS-green)
+![MySQL](https://img.shields.io/badge/-MySQL-white)
+
+## Diagram
+
+![Solera Jobs V2 Diagram](/docs/diagram.png)
 
 ## Postman
 
-[V1 Documentation](https://www.getpostman.com/collections/5f03db9b4c7fda99da79)
+V2:
+- [Documentation](https://documenter.getpostman.com/view/4095139/UUy65PgQ)
+- [Collection](https://www.getpostman.com/collections/5f03db9b4c7fda99da79)
 
 ## Commands
 
