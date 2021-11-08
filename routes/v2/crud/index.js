@@ -6,5 +6,6 @@ routes.get('/', (req, res) => {
 })
 
 routes.use('/client', require('./client'))
+routes.use('/area', require('./area'))
 
 module.exports = routes
