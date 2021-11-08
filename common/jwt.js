@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
 
-    generate (userId, email) {
+    generate (userId, id) {
         return jwt.sign(
-            { user_id: userId, email },
+            { user_id: userId, id },
             process.env.JWT_SECRET_KEY,
             { expiresIn: '15m' }
         )
