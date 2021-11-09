@@ -9,5 +9,6 @@ routes.use('/user', require('./user'))
 routes.use('/list', require('./list'))
 routes.use('/requirements', require('./requirements'))
 routes.use('/stadistics', require('./stadistics'))
+routes.use('/favorites', require('./favorites'))
 
 module.exports = routes

@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('area_log', {
     'id': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       primaryKey: true,
@@ -11,9 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     'areaId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'area',
+        key: 'id'
+      }
     },
     'name': {
       type: DataTypes.STRING(45),

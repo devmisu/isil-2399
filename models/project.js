@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('project', {
     'id': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       primaryKey: true,
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "null"
     },
     'clientId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null",
       references: {
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     'managerId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null",
       references: {

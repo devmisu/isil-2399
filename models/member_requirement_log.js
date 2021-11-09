@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('member_requirement_log', {
     'id': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       primaryKey: true,
@@ -11,19 +11,31 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     'memberRequirementId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'member_requirement',
+        key: 'id'
+      }
     },
     'memberId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'member',
+        key: 'id'
+      }
     },
     'requirementId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'requirement',
+        key: 'id'
+      }
     },
     'estimateStartDate': {
       type: DataTypes.DATE,

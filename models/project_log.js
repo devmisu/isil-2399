@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('project_log', {
     'id': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       primaryKey: true,
@@ -11,9 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     'projectId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'project',
+        key: 'id'
+      }
     },
     'name': {
       type: DataTypes.STRING(45),
@@ -21,14 +25,18 @@ module.exports = function(sequelize, DataTypes) {
       comment: "null"
     },
     'clientId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null"
     },
     'managerId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: "null"
+      comment: "null",
+      references: {
+        model: 'member',
+        key: 'id'
+      }
     },
     'createdAt': {
       type: DataTypes.DATE,
