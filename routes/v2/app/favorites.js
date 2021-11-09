@@ -6,11 +6,12 @@ const Project = require('../../../models').project
 const Favorite = require('../../../models').favorite_project
 const FavoriteLog = require('../../../models').favorite_project_log
 
+Project.belongsTo(Client)
+Favorite.belongsTo(Project)
+
 routes.get('/', auth, async (req, res) => {
 
     try {
-
-        Project.belongsTo(Client)
 
         const favorites = await Favorite.findAll({ where: { memberId: req.user.id } })
         const projects = await Project.findAll()
@@ -83,9 +84,6 @@ routes.get('/bullets', auth, async (req, res) => {
 
     try {
 
-        Project.belongsTo(Client)
-        Favorite.belongsTo(Project)
-
         const favorites = await Favorite.findAll({ where: { memberId: req.user.id } })
 
         const response = await Promise.all(
@@ -109,7 +107,7 @@ routes.get('/bullets', auth, async (req, res) => {
         res.json(response)
 
     } catch(error) {
-        console.log(error)
+        
         res.status(400).json({ message: error })
     }
 })

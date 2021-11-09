@@ -7,6 +7,9 @@ const Member = require('../../../models').member
 const Job = require('../../../models').job
 const Area = require('../../../models').area
 
+Job.belongsTo(Area)
+Member.belongsTo(Job)
+
 // Login
 routes.post('/login', async (req, res) => {
 
@@ -23,9 +26,6 @@ routes.post('/login', async (req, res) => {
         const email = payload['email']
 
         if (domain != 'solera.pe') throw 'El email ingresado no pertenece a Solera.'
-
-        Job.belongsTo(Area)
-        Member.belongsTo(Job)
 
         const user = await Member.findOne({ where: { email: email } })
 

@@ -10,6 +10,11 @@ const Project = require('../../../models').project
 const Client = require('../../../models').client
 const { Op } = require("sequelize");
 
+Project.belongsTo(Client)
+Project.belongsTo(Member, { as: 'Manager' })
+Requirement.belongsTo(Project)
+MemberRequirement.belongsTo(Requirement)
+
 routes.get('/', auth, async (req, res) => {
 
     try {
@@ -18,9 +23,6 @@ routes.get('/', auth, async (req, res) => {
 
         if (!result) throw devMessage
         
-        Requirement.belongsTo(Project)
-        MemberRequirement.belongsTo(Requirement)
-
         const memberRequirements = await MemberRequirement.findAll({
             where: {
                 memberId: req.user.id,
@@ -69,11 +71,6 @@ routes.get('/', auth, async (req, res) => {
 routes.get('/:id', auth, async (req, res) => {
 
     try {
-
-        Project.belongsTo(Client)
-        Project.belongsTo(Member, { as: 'Manager' })
-        Requirement.belongsTo(Project)
-        MemberRequirement.belongsTo(Requirement)
 
         const memberRequirement = await MemberRequirement.findByPk(req.params.id)
         const requirement = await memberRequirement.getRequirement()
