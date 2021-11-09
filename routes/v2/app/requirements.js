@@ -105,9 +105,9 @@ routes.post('/', auth, async (req, res) => {
 
         if (!result) throw devMessage
 
-        if (await MemberRequirement.findOne({ where: { memberId: req.user.id, requirementId: req.body.requirementId } }) != null) {
-            throw 'Esta tarea ya ha sido asignada al usuario.'
-        }
+        // if (await MemberRequirement.findOne({ where: { memberId: req.user.id, requirementId: req.body.requirementId } }) != null) {
+        //     throw 'Esta tarea ya ha sido asignada al usuario.'
+        // }
 
         const member_requirement = await MemberRequirement.create({
             memberId: req.user.id,
