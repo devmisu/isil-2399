@@ -11,6 +11,7 @@ import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ActivityMainBinding
 import pe.solera.solerajobs.ui.BaseActivity
 import pe.solera.solerajobs.ui.HostFragment
+import pe.solera.solerajobs.ui.main.setup.HostSetupFragment
 import pe.solera.solerajobs.ui.main.task.HostTaskListFragment
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class MainActivity : BaseActivity() {
     }
 
     private var hostFragmentTasks : HostTaskListFragment = HostTaskListFragment()
+    private var hostSetupFragment : HostSetupFragment = HostSetupFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,7 @@ class MainActivity : BaseActivity() {
     private fun setBottomNavBasedOnCurrentFragment() {
         when(currentFragment) {
             is HostTaskListFragment -> { this.setBottomNavPosition(R.id.bottom_nav_item_tasks) }
+            is HostSetupFragment -> { this.setBottomNavPosition(R.id.bottom_nav_item_config) }
         }
     }
 
@@ -63,6 +66,7 @@ class MainActivity : BaseActivity() {
         binding.bottomNavMain.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.bottom_nav_item_tasks -> this.showFragmentOnFrameLayout(this.hostFragmentTasks)
+                R.id.bottom_nav_item_config -> this.showFragmentOnFrameLayout(this.hostSetupFragment)
             }
             return@setOnItemSelectedListener true
         }
@@ -73,6 +77,7 @@ class MainActivity : BaseActivity() {
             this.supportFragmentManager.let {
                 when(fragment) {
                     is HostTaskListFragment -> it.addFragmentToNavigation(fragment, HostTaskListFragment::class.java.name, R.id.fragmentContainerMain, this.currentFragment)
+                    is HostSetupFragment -> it.addFragmentToNavigation(fragment, HostSetupFragment::class.java.name, R.id.fragmentContainerMain, this.currentFragment)
                 }
                 validateCurrentFragmentInstance(fragment)
             }

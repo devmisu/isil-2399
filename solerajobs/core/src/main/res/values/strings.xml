@@ -28,6 +28,7 @@
     <string name="start_nagivation">Iniciar navegación con</string>
     <!-- App Only-->
     <string name="want_to_leave_app">¿Quiere salir de la aplicación?</string>
+    <string name="want_to_logout">¿Desea cerrar sesión?</string>
 
     <string name="not_authorized">Ocurrió un problema con la validación de sesión.</string>
 </resources>
