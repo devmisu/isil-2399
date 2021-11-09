@@ -212,4 +212,42 @@ routes.delete('/:id', auth, async (req, res) => {
     }
 })
 
+routes.put('/snap/:id', auth, async (req, res) => {
+
+    try {
+
+        const { result, devMessage } = validator.valid(req.body, ['hours'])
+
+        if (!result) { throw devMessage }
+
+        const member_requirement = await MemberRequirement.findByPk(req.params.id)
+
+        if (member_requirement == null) { throw 'No se encontro la tarea asignada al usuario.' }
+
+        member_requirement.realHours = req.body.hours
+
+        await member_requirement.save()
+
+        await MemberRequirementLog.create({
+            memberRequirementId: member_requirement.id,
+            memberId: member_requirement.memberId,
+            requirementId: member_requirement.requirementId,
+            estimateStartDate: member_requirement.estimateStartDate,
+            estimateEndDate: member_requirement.estimateEndDate,
+            estimateHours: member_requirement.estimateHours,
+            realHours: member_requirement.realHours,
+            comment: member_requirement.comment,
+            createdAt: member_requirement.createdAt,
+            updatedAt: member_requirement.updatedAt,
+            deletedAt: member_requirement.deletedAt
+        })
+
+        res.json()
+
+    } catch(error) {
+
+        res.status(400).json({ message: error })
+    }
+})
+
 module.exports = routes
