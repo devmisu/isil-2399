@@ -13,7 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.core.extension.showMaterialDialog
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentSetupBinding
+import pe.solera.solerajobs.ui.BaseActivity
 import pe.solera.solerajobs.ui.BaseFragment
+import pe.solera.solerajobs.ui.login.LoginActivity
 import pe.solera.solerajobs.ui.main.setup.quickaccess.QuickAccessActivity
 
 @AndroidEntryPoint
@@ -64,7 +66,12 @@ class SetupFragment : BaseFragment(), SetupOptionsAdapter.SetupOptionsListener {
                     acceptBtnMsg = getString(R.string.exit),
                     showNegativeBtn = true
                 ) { action ->
-
+                    if (action) {
+                        startActivity(Intent(requireActivity(), LoginActivity::class.java).apply {
+                            putExtra(BaseActivity.UNAUTHORIZED, true)
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        })
+                    }
                 }
             }
             SetupOptionType.QUICK_ACCESS -> {

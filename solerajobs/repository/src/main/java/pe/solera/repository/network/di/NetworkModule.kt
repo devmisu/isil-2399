@@ -7,6 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import pe.solera.repository.network.api.SoleraJobsApi
 import pe.solera.repository.network.api.app.UserNetworkImpl
 import pe.solera.repository.network.api.app.UserNetworkRepository
+import pe.solera.repository.network.api.chart.ChartNetworkImpl
+import pe.solera.repository.network.api.chart.ChartNetworkRepository
 import pe.solera.repository.network.api.login.LoginNetworkImpl
 import pe.solera.repository.network.api.login.LoginNetworkRepository
 import pe.solera.repository.network.api.setup.SetupNetworkImpl
@@ -42,5 +44,11 @@ object NetworkModule {
     fun provideSetupNetwork(
         soleraJobsApi: SoleraJobsApi
     ) : SetupNetworkRepository = SetupNetworkImpl(soleraJobsApi)
+
+    @Singleton
+    @Provides
+    fun provideChartNetwork(
+        soleraJobsApi: SoleraJobsApi
+    ) : ChartNetworkRepository = ChartNetworkImpl(soleraJobsApi)
 
 }

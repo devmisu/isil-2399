@@ -104,6 +104,8 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-auth:$g_auth_version"
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     implementation project(path: ':repository')
     implementation project(path: ':entity')
     implementation project(path: ':core')

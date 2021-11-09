@@ -1,6 +1,7 @@
 package pe.solera.repository.network.api
 
 import pe.solera.repository.network.api.app.UserResponse
+import pe.solera.repository.network.api.chart.ProjectResponse
 import pe.solera.repository.network.api.login.LoginRequest
 import pe.solera.repository.network.api.login.LoginResponse
 import pe.solera.repository.network.api.setup.FavoritesResponse
@@ -55,4 +56,10 @@ interface SoleraJobsApi {
 
     @GET("favorites/bullets")
     suspend fun getBullets() : Response<ArrayList<BulletsResponse>>
+
+    @GET("stadistics")
+    suspend fun getChart(
+        @Query("startDate") startDate: String,
+        @Query("endDate") endDate: String
+    ) : Response<ArrayList<ProjectResponse>>
 }

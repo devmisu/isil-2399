@@ -19,11 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.core.ScreenDimensions
 import pe.solera.core.extension.addFragment
 import pe.solera.solerajobs.R
+import pe.solera.solerajobs.ui.dialog.chart.ProjectDetailFragment
 import pe.solera.solerajobs.ui.dialog.login.LoginDialogFragment
 import javax.inject.Inject
 
 enum class ChildBottomSheetType {
-    Login;
+    Login, ChartDetail;
 }
 
 @AndroidEntryPoint
@@ -113,6 +114,7 @@ class HostBottomSheet : BottomSheetDialogFragment() {
 
     private fun getFragmentByType() : Fragment = when(this.type) {
         ChildBottomSheetType.Login -> LoginDialogFragment.newInstance(args)
+        ChildBottomSheetType.ChartDetail -> ProjectDetailFragment.newInstance(args)
     }
 
     class Builder {
