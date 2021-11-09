@@ -29,27 +29,36 @@ routes.get('/', auth, async (req, res) => {
             }
         })
 
-        // TODO: Array vacio genera error
+        var responseData
 
-        res.json({
-            workedHours: memberRequirements.map((obj) => obj.realHours || 0).reduce((a, b) => a + b),
-            requirements: await Promise.all(
-            
-                memberRequirements.map(async (obj) => {
-    
-                    const requirement = await obj.getRequirement()
-                    const project = await requirement.getProject()
+        if (memberRequirements.length == 0) {
+            responseData = {
+                workedHours: 0,
+                requirements: []
+            }
+        } else {
+            responseData = {
+                workedHours: memberRequirements.map((obj) => obj.realHours || 0).reduce((a, b) => a + b),
+                requirements: await Promise.all(
+                
+                    memberRequirements.map(async (obj) => {
         
-                    return {
-                        id: obj.id,
-                        projectName: project.name,
-                        requirementDescription: requirement.name,
-                        estimateHours: obj.estimateHours,
-                        realHours: obj.realHours || 0
-                    }
-                })
-            )
-        })
+                        const requirement = await obj.getRequirement()
+                        const project = await requirement.getProject()
+            
+                        return {
+                            id: obj.id,
+                            projectName: project.name,
+                            requirementDescription: requirement.name,
+                            estimateHours: obj.estimateHours,
+                            realHours: obj.realHours || 0
+                        }
+                    })
+                )
+            }
+        }
+
+        res.json(responseData)
 
     } catch(error) {
         
