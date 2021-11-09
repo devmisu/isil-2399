@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.setup.quickaccess.QuickAccessActivity">
+        tools:context=".ui.main.setup.quickaccess.QuickAccessActivity"
+        android:background="@color/background">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnBack"
@@ -39,6 +40,18 @@
             android:ellipsize="end"
             android:text="Accesos directos" />
 
+        <include
+            android:id="@+id/rlyProgress"
+            layout="@layout/layout_loader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/rcvProject"
+            app:layout_constraintStart_toStartOf="@id/rcvProject"
+            app:layout_constraintEnd_toEndOf="@id/rcvProject"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            tools:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvProject"
             android:layout_width="0dp"
@@ -46,11 +59,43 @@
             app:layout_constraintTop_toBottomOf="@id/tvHeaderTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnSave"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="5"
             tools:listitem="@layout/item_project_preference"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/Font.Semibold"
+            android:textColor="@color/text_main_secondary"
+            android:textSize="16sp"
+            android:background="@drawable/bg_with_border_secondary"
+            android:text="@string/edit"/>
+
+        <ProgressBar
+            android:id="@+id/progressSave"
+            style="@style/ProgressLoader"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@color/transparent"
+            android:elevation="4dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/btnSave"
+            app:layout_constraintEnd_toEndOf="@id/btnSave"
+            app:layout_constraintBottom_toBottomOf="@id/btnSave"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

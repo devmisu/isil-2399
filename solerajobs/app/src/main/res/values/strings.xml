@@ -33,4 +33,6 @@
     <string name="select_hours">Seleccione horas</string>
     <string name="insert_comment">Agregue un comentario</string>
 
+    <string name="success_save_quickaccess">Accesos directos guardados correctamente. Podrá visualizarlos en la pantalla inicial.</string>
+
 </resources>

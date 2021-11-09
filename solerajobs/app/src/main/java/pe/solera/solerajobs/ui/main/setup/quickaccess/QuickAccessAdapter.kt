@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import pe.solera.entity.Project
+import pe.solera.entity.QuickAccessForSelection
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ItemProjectPreferenceBinding
 import pe.solera.solerajobs.ui.util.selectable.SelectableAdapter
 import pe.solera.solerajobs.ui.util.selectable.SelectableModel
 
 class QuickAccessAdapter(
-    private val listener: SelectableAdapterListener<Project>
-) : SelectableAdapter<Project, QuickAccessAdapter.QuickAccessViewHolder>() {
+    private val listener: SelectableAdapterListener<QuickAccessForSelection>
+) : SelectableAdapter<QuickAccessForSelection, QuickAccessAdapter.QuickAccessViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuickAccessViewHolder {
         return QuickAccessViewHolder(
@@ -29,7 +29,7 @@ class QuickAccessAdapter(
         holder.bind(items[position], listener)
     }
 
-    fun unselectItem(item: SelectableModel<Project>) {
+    fun unselectItem(item: SelectableModel<QuickAccessForSelection>) {
         items.forEachIndexed { index, selectableModel ->
             if (selectableModel.identifier == item.identifier) {
                 selectableModel.isSelected = false
@@ -43,11 +43,12 @@ class QuickAccessAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            item: SelectableModel<Project>,
-            listener: SelectableAdapterListener<Project>
+            item: SelectableModel<QuickAccessForSelection>,
+            listener: SelectableAdapterListener<QuickAccessForSelection>
         ) {
             binding.isSelected = item.isSelected
             binding.name = item.model?.title ?: String()
+            binding.description = item.model?.description ?: String()
             binding.cbxEnabled.setOnCheckedChangeListener { _, isChecked ->
                 item.isSelected = isChecked
                 listener.onItemClicked(item)

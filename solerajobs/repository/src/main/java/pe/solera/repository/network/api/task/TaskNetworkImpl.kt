@@ -88,7 +88,7 @@ class TaskNetworkImpl(
 
     override suspend fun createTask(userTask: UserTask): EventResult<Boolean> {
         val request = UserTaskCreationRequest(
-            id_requirement = userTask.id,
+            requirementId = userTask.id,
             date = userTask.estimateStartDate,
             hours = userTask.realHours.toInt(),
             comment = userTask.comment

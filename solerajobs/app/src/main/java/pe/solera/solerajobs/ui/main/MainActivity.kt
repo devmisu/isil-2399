@@ -111,4 +111,16 @@ class MainActivity : BaseActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

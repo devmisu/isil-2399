@@ -1,8 +1,12 @@
 package pe.solera.solerajobs.ui.main.setup.quickaccess
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import pe.solera.entity.Project
+import pe.solera.core.extension.launchOnIO
+import pe.solera.entity.QuickAccessForSelection
+import pe.solera.repository.network.api.setup.SetupNetworkRepository
 import pe.solera.solerajobs.ui.util.selectable.SelectableModel
 import javax.inject.Inject
 
@@ -10,27 +14,34 @@ import javax.inject.Inject
 class QuickAccessViewModel
 @Inject
 constructor(
-
+    private val setupNetworkRepository: SetupNetworkRepository
 ): ViewModel() {
 
-    var projects: ArrayList<Project> = arrayListOf(
-        Project("1", "Solera reuniones 123"),
-        Project("2", "Solera reuniones 124"),
-        Project("3", "Solera reuniones 125"),
-        Project("4", "Solera reuniones 126"),
-        Project("5", "Solera reuniones 127"),
-    )
+    private var quickAccessEvent: MutableLiveData<QuickAccessEventResult> = MutableLiveData()
+    val quickAccessEventLiveData: LiveData<QuickAccessEventResult> get() = quickAccessEvent
 
-    var projectsToSelect : ArrayList<SelectableModel<Project>> = arrayListOf()
+    private var projectsToSelect : ArrayList<SelectableModel<QuickAccessForSelection>> = arrayListOf()
 
     companion object {
         const val MAX_PROJECTS = 4
     }
 
-    init {
-        projects.map {
-            projectsToSelect.add(SelectableModel(it, it.id))
-        }
+    fun getQuickAccessListForSelection() {
+        quickAccessEvent.value = QuickAccessEventResult.Loading
+        launchOnIO(
+            doTask = {
+                setupNetworkRepository.getQuickAccessForSelection()
+            },
+            result = {
+                it.map { model ->
+                    projectsToSelect.add(SelectableModel(model, model.id, isSelected = model.selected))
+                }
+                quickAccessEvent.value = QuickAccessEventResult.SuccessQuickAccess(projectsToSelect)
+            },
+            error = {
+                quickAccessEvent.value = QuickAccessEventResult.Error(it)
+            }
+        )
     }
 
     fun addSelectedProject(errorMsg: (String) -> Unit) {
@@ -41,4 +52,27 @@ constructor(
         }
     }
 
+    fun saveSelectedQuickAccessList() {
+        quickAccessEvent.value = QuickAccessEventResult.SavingQuickAccess
+        launchOnIO(
+            doTask = {
+                val request = ArrayList<QuickAccessForSelection>()
+                projectsToSelect.filter { it.isSelected }.let {
+                    it.map { model ->
+                        model.model?.let { validModel ->
+                            request.add(validModel)
+                        }
+                    }
+                }
+                setupNetworkRepository.saveQuickAccessSelected(request)
+            },
+            result = {
+                quickAccessEvent.value = QuickAccessEventResult.SuccessSaveQuickAccess
+                quickAccessEvent = MutableLiveData()
+            },
+            error = {
+                quickAccessEvent.value = QuickAccessEventResult.Error(it)
+            }
+        )
+    }
 }

@@ -14,7 +14,7 @@ open class BaseActivity : AppCompatActivity() {
         const val UNAUTHORIZED = "UNAUTHORIZED"
     }
 
-    fun validateException(ex: Exception, errorMessage: String.() -> Unit) {
+    fun validateException(ex: Exception, errorMessage: (String.() -> Unit)? = null) {
         when(ex) {
             is BaseException.UnAuthorizeException -> {
                 startActivity(Intent(this, LoginActivity::class.java).apply {
@@ -23,7 +23,7 @@ open class BaseActivity : AppCompatActivity() {
                 })
             }
             else -> {
-                errorMessage.invoke(ex.message ?: ConstantsCore.Error.Message.generalErrorMessage)
+                errorMessage?.invoke(ex.message ?: ConstantsCore.Error.Message.generalErrorMessage)
             }
         }
     }

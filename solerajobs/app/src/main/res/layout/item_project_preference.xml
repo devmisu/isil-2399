@@ -12,6 +12,10 @@
             name="name"
             type="String" />
 
+        <variable
+            name="description"
+            type="String" />
+
         <import type="android.view.View"/>
     </data>
 
@@ -28,13 +32,28 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cbxEnabled"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="12dp"
-            android:textAppearance="@style/Font.Medium"
+            android:textAppearance="@style/Font.Bold"
             android:text="@{name}"
+            tools:text="Solera reuniones internas - Interno"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cbxEnabled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:textAppearance="@style/Font.Medium"
+            android:text="@{description}"
             tools:text="Solera reuniones internas - Interno"/>
 
         <androidx.appcompat.widget.AppCompatCheckBox
