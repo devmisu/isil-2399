@@ -24,10 +24,12 @@ routes.get('/', auth, async (req, res) => {
         const memberRequirements = await MemberRequirement.findAll({
             where: {
                 memberId: req.user.id,
-                estimateStartDate: { [Op.gte]: new Date(req.query.date) },
+                estimateStartDate: { [Op.lte]: new Date(req.query.date) },
                 estimateEndDate: { [Op.gte]: new Date(req.query.date) }
             }
         })
+
+        // TODO: Array vacio genera error
 
         res.json({
             workedHours: memberRequirements.map((obj) => obj.realHours || 0).reduce((a, b) => a + b),
@@ -50,7 +52,7 @@ routes.get('/', auth, async (req, res) => {
         })
 
     } catch(error) {
-
+        
         res.status(400).json({ message: error })
     }
 })

@@ -28,10 +28,11 @@ routes.post('/login', async (req, res) => {
         Member.belongsTo(Job)
 
         const user = await Member.findOne({ where: { email: email } })
-        const job = await user.getJob()
-        const area = await job.getArea()
 
         if (user == null) throw 'Tu cuenta no esta activa.'
+
+        const job = await user.getJob()
+        const area = await job.getArea()
 
         const token = jwt.generate(userId, user.id)
 
@@ -50,7 +51,7 @@ routes.post('/login', async (req, res) => {
         })
 
     } catch(error) {
-
+        
         res.status(400).json({ message: error })
     }
 })
