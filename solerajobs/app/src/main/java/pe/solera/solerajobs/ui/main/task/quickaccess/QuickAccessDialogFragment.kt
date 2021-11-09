@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import pe.solera.entity.QuickAccess
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentQuickaccessBinding
+import pe.solera.solerajobs.ui.main.task.detail.CreateTaskFragment
 import pe.solera.solerajobs.ui.main.task.detail.TaskDetailActivity
 import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel
 import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel.Companion.USER_TASK_ID
@@ -66,6 +67,7 @@ class QuickAccessDialogFragment : DialogFragment(), QuickAccessOptionsAdapter.Qu
     override fun optionSelected(optionModel: QuickAccess) {
         startActivity(Intent(requireActivity(), TaskDetailActivity::class.java).apply {
             putExtra(USER_TASK_ID, TaskDetailViewModel.NEW_USER_TASK_ID)
+            putExtra(CreateTaskFragment.QUICKACCESS, optionModel)
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
         })
         dismiss()

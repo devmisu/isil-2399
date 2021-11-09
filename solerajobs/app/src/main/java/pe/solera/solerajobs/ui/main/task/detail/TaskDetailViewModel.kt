@@ -6,9 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import pe.solera.core.ConstantsCore
 import pe.solera.core.extension.launchOnIO
 import pe.solera.core.extension.toTextualDate
-import pe.solera.entity.TaskIdentifier
-import pe.solera.entity.TaskType
-import pe.solera.entity.UserTask
+import pe.solera.entity.*
 import pe.solera.repository.network.api.task.TaskNetworkRepository
 import javax.inject.Inject
 
@@ -27,6 +25,7 @@ constructor(
     var userTaskModel : UserTaskModel = UserTaskModel()
 
     var isNewTask: Boolean = false
+    var fromQuickAccess: Boolean = false
 
     var clientList      : ArrayList<TaskIdentifier> = ArrayList()
     var projectList     : ArrayList<TaskIdentifier> = ArrayList()
@@ -103,6 +102,12 @@ constructor(
                 taskDetailEvent.value = TaskDetailEventResult.Error(it)
             }
         )
+    }
+
+    fun fillWithQuickAccess(model: QuickAccess) {
+        fromQuickAccess = true
+        userTaskModel.clientIdentifier = Pair(-1, TaskIdentifier(TaskType.CLIENT, name = model.client.name, taskParent = model.client.id))
+        userTaskModel.projectIdentifier = Pair(-1, TaskIdentifier(TaskType.PROJECT, name = model.project.name, taskParent = model.project.id))
     }
 
     fun getListByTaskType(taskIdentifier: TaskIdentifier) {

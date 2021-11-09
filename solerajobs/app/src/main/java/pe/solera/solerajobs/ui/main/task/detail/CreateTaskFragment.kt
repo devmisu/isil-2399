@@ -15,6 +15,7 @@ import pe.solera.core.extension.showMaterialDialog
 import pe.solera.core.extension.showMaterialDialogWithOptions
 import pe.solera.core.extension.toDate
 import pe.solera.core.extension.toDateString
+import pe.solera.entity.QuickAccess
 import pe.solera.entity.TaskIdentifier
 import pe.solera.entity.TaskType
 import pe.solera.solerajobs.BuildConfig
@@ -33,6 +34,10 @@ class CreateTaskFragment : BaseFragment() {
     private val viewModel : TaskDetailViewModel by activityViewModels()
 
     private var alertDialog : AlertDialog? = null
+
+    companion object {
+        const val QUICKACCESS = "QUICKACCESS"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +58,13 @@ class CreateTaskFragment : BaseFragment() {
         setupDateSelector()
         setupCommentInput()
         setupCreateTaskButton()
-        viewModel.getListByTaskType(TaskIdentifier(TaskType.CLIENT))
+        if (viewModel.fromQuickAccess) {
+            binding.tvClientSelector.text = viewModel.userTaskModel.clientIdentifier.second.name
+            binding.tvProjectSelector.text = viewModel.userTaskModel.projectIdentifier.second.name
+            viewModel.getListByTaskType(viewModel.userTaskModel.projectIdentifier.second.copy(taskType = TaskType.REQUIREMENT))
+        } else {
+            viewModel.getListByTaskType(TaskIdentifier(TaskType.CLIENT))
+        }
         observeViewModel()
     }
 
