@@ -20,10 +20,13 @@
         tools:ignore="LockedOrientationActivity, UnusedAttribute"
         tools:replace="android:allowBackup, android:name">
         <activity
+            android:name=".ui.main.setup.quickaccess.QuickAccessActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,18 +36,18 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.task.detail.TaskDetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

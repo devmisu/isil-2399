@@ -1,5 +1,6 @@
 package pe.solera.solerajobs.ui.main.setup
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import pe.solera.core.extension.showMaterialDialog
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentSetupBinding
 import pe.solera.solerajobs.ui.BaseFragment
+import pe.solera.solerajobs.ui.main.setup.quickaccess.QuickAccessActivity
 
 @AndroidEntryPoint
 class SetupFragment : BaseFragment(), SetupOptionsAdapter.SetupOptionsListener {
@@ -66,7 +68,7 @@ class SetupFragment : BaseFragment(), SetupOptionsAdapter.SetupOptionsListener {
                 }
             }
             SetupOptionType.QUICK_ACCESS -> {
-                Toast.makeText(requireContext(), optionModel.title, Toast.LENGTH_SHORT).show()
+                startActivity(Intent(requireActivity(), QuickAccessActivity::class.java))
             }
         }
     }
