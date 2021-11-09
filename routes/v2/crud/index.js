@@ -12,5 +12,6 @@ routes.use('/member', require('./member'))
 routes.use('/project', require('./project'))
 routes.use('/requirement', require('./requirement'))
 routes.use('/member_requirement', require('./member_requirement'))
+routes.use('/favorite_project', require('./favorite_project'))
 
 module.exports = routes
