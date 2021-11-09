@@ -7,6 +7,7 @@ routes.get('/', (req, res) => {
 
 routes.use('/user', require('./user'))
 routes.use('/list', require('./list'))
-routes.use('/requirement', require('./requirement'))
+routes.use('/requirements', require('./requirements'))
+routes.use('/stadistics', require('./stadistics'))
 
 module.exports = routes
