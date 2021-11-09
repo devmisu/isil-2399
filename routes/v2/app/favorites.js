@@ -1,6 +1,5 @@
 const express = require('express')
 const routes = express.Router()
-const validator = require('../../../common/validator')
 const auth = require('../../../middlewares/auth')
 const Client = require('../../../models').client
 const Project = require('../../../models').project
@@ -76,6 +75,41 @@ routes.post('/', auth, async (req, res) => {
 
     } catch(error) {
         
+        res.status(400).json({ message: error })
+    }
+})
+
+routes.get('/bullets', auth, async (req, res) => {
+
+    try {
+
+        Project.belongsTo(Client)
+        Favorite.belongsTo(Project)
+
+        const favorites = await Favorite.findAll({ where: { memberId: req.user.id } })
+
+        const response = await Promise.all(
+            favorites.map(async (obj) => {
+                const project = await obj.getProject()
+                const client = await project.getClient()
+                return {
+                    name: "[" + client.name + "] - " + project.name,
+                    client: {
+                        id: client.id,
+                        name: client.name
+                    },
+                    project: {
+                        id: project.id,
+                        name: project.name
+                    }
+                }
+            })
+        )
+
+        res.json(response)
+
+    } catch(error) {
+        console.log(error)
         res.status(400).json({ message: error })
     }
 })
