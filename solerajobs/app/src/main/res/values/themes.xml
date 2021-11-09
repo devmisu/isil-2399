@@ -69,4 +69,11 @@
     </style>
     <!--End Font-->
 
+    <style name="QuickAccessDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
 </resources>

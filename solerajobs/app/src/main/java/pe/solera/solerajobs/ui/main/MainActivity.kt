@@ -3,6 +3,7 @@ package pe.solera.solerajobs.ui.main
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.AndroidEntryPoint
 import pe.solera.core.extension.addFragmentToNavigation
 import pe.solera.core.extension.moveBackToFirstFragment
@@ -27,6 +28,10 @@ class MainActivity : BaseActivity() {
 
     private var hostFragmentTasks : HostTaskListFragment = HostTaskListFragment()
     private var hostSetupFragment : HostSetupFragment = HostSetupFragment()
+
+    companion object {
+        var modifiedQuickAccess: MutableLiveData<Boolean> = MutableLiveData(false)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,15 +117,4 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

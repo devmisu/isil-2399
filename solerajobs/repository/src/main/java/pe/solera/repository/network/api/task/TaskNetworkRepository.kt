@@ -1,10 +1,12 @@
 package pe.solera.repository.network.api.task
 
 import pe.solera.core.EventResult
+import pe.solera.entity.QuickAccess
 import pe.solera.entity.TaskIdentifier
 import pe.solera.entity.UserTask
 import pe.solera.entity.UserWorkedDay
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface TaskNetworkRepository {
 
@@ -19,5 +21,7 @@ interface TaskNetworkRepository {
     suspend fun createTask(userTask: UserTask) : EventResult<Boolean>
 
     suspend fun deleteTask(id: Int) : EventResult<Boolean>
+
+    suspend fun getUserQuickAccessList() : EventResult<ArrayList<QuickAccess>>
 
 }

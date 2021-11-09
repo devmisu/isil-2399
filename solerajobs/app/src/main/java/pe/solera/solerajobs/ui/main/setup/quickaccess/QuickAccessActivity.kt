@@ -2,7 +2,6 @@ package pe.solera.solerajobs.ui.main.setup.quickaccess
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,9 +10,9 @@ import pe.solera.entity.QuickAccessForSelection
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.ActivityQuickAccessBinding
 import pe.solera.solerajobs.ui.BaseActivity
+import pe.solera.solerajobs.ui.main.MainActivity
 import pe.solera.solerajobs.ui.util.selectable.SelectableAdapter
 import pe.solera.solerajobs.ui.util.selectable.SelectableModel
-import pe.solera.solerajobs.ui.validateException
 
 @AndroidEntryPoint
 class QuickAccessActivity : BaseActivity(), SelectableAdapter.SelectableAdapterListener<QuickAccessForSelection> {
@@ -71,6 +70,7 @@ class QuickAccessActivity : BaseActivity(), SelectableAdapter.SelectableAdapterL
                 }
                 QuickAccessEventResult.SuccessSaveQuickAccess -> {
                     binding.progressSave.visibility = View.GONE
+                    MainActivity.modifiedQuickAccess.postValue(true)
                     alertDialog?.hide()
                     alertDialog = showMaterialDialog(
                         message = this.getString(R.string.success_save_quickaccess),

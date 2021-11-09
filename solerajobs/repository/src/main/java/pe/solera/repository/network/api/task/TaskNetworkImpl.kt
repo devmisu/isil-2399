@@ -2,6 +2,7 @@ package pe.solera.repository.network.api.task
 
 import pe.solera.core.ConstantsCore
 import pe.solera.core.EventResult
+import pe.solera.entity.QuickAccess
 import pe.solera.entity.TaskIdentifier
 import pe.solera.entity.UserTask
 import pe.solera.entity.UserWorkedDay
@@ -9,6 +10,7 @@ import pe.solera.repository.network.api.SoleraJobsApi
 import pe.solera.repository.util.validateResponse
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -121,6 +123,22 @@ class TaskNetworkImpl(
                 },
                 successWithoutBody = {
                     continuation.resume(EventResult.Success(true))
+                }
+            )
+        }
+    }
+
+    override suspend fun getUserQuickAccessList(): EventResult<ArrayList<QuickAccess>> {
+        val response = soleraJobsApi.getBullets()
+        return suspendCoroutine { continuation ->
+            response.validateResponse(
+                success = {
+                    val parsedResponse = ArrayList<QuickAccess>()
+                    it.map { model -> parsedResponse.add(model.toEntity()) }
+                    continuation.resume(EventResult.Success(parsedResponse))
+                },
+                error = {
+                    continuation.resume(EventResult.Error(it))
                 }
             )
         }

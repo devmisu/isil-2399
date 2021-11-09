@@ -52,4 +52,7 @@ interface SoleraJobsApi {
     suspend fun setFavorites(
         @Body request: ArrayList<String>
     ) : Response<Void>
+
+    @GET("favorites/bullets")
+    suspend fun getBullets() : Response<ArrayList<BulletsResponse>>
 }

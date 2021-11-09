@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.AndroidEntryPoint
+import pe.solera.entity.QuickAccess
 import pe.solera.entity.UserTask
 import pe.solera.solerajobs.R
 import pe.solera.solerajobs.databinding.FragmentTaskListBinding
+import pe.solera.solerajobs.ui.main.MainActivity
 import pe.solera.solerajobs.ui.main.task.detail.TaskDetailActivity
-import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel
 import pe.solera.solerajobs.ui.main.task.detail.TaskDetailViewModel.Companion.USER_TASK_ID
+import pe.solera.solerajobs.ui.main.task.quickaccess.QuickAccessDialogFragment
 import pe.solera.solerajobs.ui.validateException
 
 @AndroidEntryPoint
@@ -42,6 +45,7 @@ class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
         super.onViewCreated(view, savedInstanceState)
         binding.tvDateSelected.text = viewModel.getTextualCurrentDay()
         viewModel.getUserInfoAndTasksOfDay()
+        viewModel.getUserQuickAccessList()
         setupBackDay()
         setupNextDay()
         setupAddTaskButton()
@@ -70,6 +74,12 @@ class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
                 is TaskListEventResult.Error -> requireActivity().validateException(it.ex) {
                     println(this)
                 }
+            }
+        }
+        MainActivity.modifiedQuickAccess.observe(viewLifecycleOwner) {
+            if (it) {
+                MainActivity.modifiedQuickAccess.postValue(false)
+                viewModel.getUserQuickAccessList()
             }
         }
     }
@@ -113,10 +123,8 @@ class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
 
     private fun setupAddTaskButton() {
         binding.btnCreateTask.setOnClickListener {
-            startActivity(Intent(requireActivity(), TaskDetailActivity::class.java).apply {
-                putExtra(USER_TASK_ID, TaskDetailViewModel.NEW_USER_TASK_ID)
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
+            val dialog = QuickAccessDialogFragment.newInstance(viewModel.quickAccessList)
+            dialog.show(requireActivity().supportFragmentManager, QuickAccessDialogFragment::class.java.name)
         }
     }
 

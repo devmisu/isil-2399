@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import pe.solera.core.extension.capitalized
 import pe.solera.core.extension.launchOnIO
 import pe.solera.core.extension.toTextualDate
+import pe.solera.entity.QuickAccess
 import pe.solera.entity.UserTask
 import pe.solera.repository.local.preferences.source.user.LoginPreferencesRepository
 import pe.solera.repository.network.api.task.TaskNetworkRepository
@@ -36,6 +37,19 @@ constructor(
     private var currentDaySelected: Date = Date()
 
     private var changeDayJob : Job? = null
+
+    var quickAccessList: ArrayList<QuickAccess> = ArrayList()
+
+    fun getUserQuickAccessList() {
+        launchOnIO(
+            doTask = {
+                taskNetworkRepository.getUserQuickAccessList()
+            },
+            result = {
+                quickAccessList = it
+            }
+        )
+    }
 
     fun getUserInfoAndTasksOfDay() {
         launchOnIO(
