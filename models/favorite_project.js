@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('job_log', {
+  return sequelize.define('favorite_project', {
     'id': {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -10,26 +10,21 @@ module.exports = function(sequelize, DataTypes) {
       comment: "null",
       autoIncrement: true
     },
-    'jobId': {
+    'memberId': {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null",
       references: {
-        model: 'job',
+        model: 'member',
         key: 'id'
       }
     },
-    'name': {
-      type: DataTypes.STRING(45),
-      allowNull: false,
-      comment: "null"
-    },
-    'areaId': {
+    'projectId': {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null",
       references: {
-        model: 'area',
+        model: 'project',
         key: 'id'
       }
     },
@@ -49,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "null"
     }
   }, {
-    tableName: 'job_log',
+    tableName: 'favorite_project',
     paranoid: true
   });
 };

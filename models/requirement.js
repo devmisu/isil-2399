@@ -3,8 +3,9 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('requirement', {
     'id': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
+      primaryKey: true,
       primaryKey: true,
       comment: "null",
       autoIncrement: true
@@ -15,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "null"
     },
     'projectId': {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       comment: "null",
       references: {
