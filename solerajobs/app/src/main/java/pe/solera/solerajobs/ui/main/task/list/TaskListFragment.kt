@@ -74,6 +74,11 @@ class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
                 is TaskListEventResult.Error -> requireActivity().validateException(it.ex) {
                     println(this)
                 }
+                is TaskListEventResult.LoadingSnap -> {
+                    if (it.loading) {
+
+                    }
+                }
             }
         }
         MainActivity.modifiedQuickAccess.observe(viewLifecycleOwner) {
@@ -133,5 +138,19 @@ class TaskListFragment : Fragment(), TaskListAdapter.TaskListListener {
             putExtra(USER_TASK_ID, id)
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP
         })
+    }
+
+    override fun snapLess(modified: Pair<Int, Double>) {
+        if (!isLoading) {
+            adapter.updateRow(modified)
+            viewModel.snapHour(modified)
+        }
+    }
+
+    override fun snapMore(modified: Pair<Int, Double>) {
+        if (!isLoading) {
+            adapter.updateRow(modified)
+            viewModel.snapHour(modified)
+        }
     }
 }

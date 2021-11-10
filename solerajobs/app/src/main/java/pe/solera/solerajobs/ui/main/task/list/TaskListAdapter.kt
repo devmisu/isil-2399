@@ -24,6 +24,8 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     interface TaskListListener {
         fun taskClicked(id: Int)
+        fun snapLess(modified: Pair<Int, Double>)
+        fun snapMore(modified: Pair<Int, Double>)
     }
 
     override fun getItemCount(): Int = this.items.size
@@ -42,6 +44,15 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bindView(items[position])
+    }
+
+    fun updateRow(modified: Pair<Int, Double>) {
+        items.forEachIndexed { index, userTask ->
+            if (userTask.id == modified.first) {
+                notifyItemChanged(index)
+                return@forEachIndexed
+            }
+        }
     }
 
     inner class TaskListItemsDiffCallback(
@@ -71,6 +82,14 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
             viewBinding.userTask = userTask
             viewBinding.ctrTaskItem.setOnClickListener {
                 listener?.taskClicked(userTask.id)
+            }
+            viewBinding.btnLess.setOnClickListener {
+                userTask.realHours--
+                listener?.snapLess(Pair(userTask.id, userTask.realHours))
+            }
+            viewBinding.btnMore.setOnClickListener {
+                userTask.realHours++
+                listener?.snapMore(Pair(userTask.id, userTask.realHours))
             }
         }
 

@@ -143,4 +143,21 @@ class TaskNetworkImpl(
             )
         }
     }
+
+    override suspend fun snapHour(modifiedTask: Pair<Int, Double>): EventResult<Boolean> {
+        val response = soleraJobsApi.snapTask(modifiedTask.first.toString(), UpdateTaskRequest(modifiedTask.second))
+        return suspendCoroutine { continuation ->
+            response.validateResponse(
+                success = {
+                    continuation.resume(EventResult.Success(true))
+                },
+                error = {
+                    continuation.resume(EventResult.Error(it))
+                },
+                successWithoutBody = {
+                    continuation.resume(EventResult.Success(true))
+                }
+            )
+        }
+    }
 }

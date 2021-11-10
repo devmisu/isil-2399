@@ -119,7 +119,7 @@
             android:textColor="@color/text_main_secondary"
             android:textSize="16sp"
             android:background="@drawable/bg_with_border_secondary"
-            android:text="@string/edit"/>
+            android:text="Consultar"/>
 
         <ProgressBar
             android:id="@+id/progressSave"

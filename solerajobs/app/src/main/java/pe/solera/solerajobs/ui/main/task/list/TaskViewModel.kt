@@ -40,6 +40,21 @@ constructor(
 
     var quickAccessList: ArrayList<QuickAccess> = ArrayList()
 
+    fun snapHour(modified: Pair<Int, Double>) {
+        userTaskEvent.value = TaskListEventResult.LoadingSnap(true)
+        launchOnIO(
+            doTask = {
+                taskNetworkRepository.snapHour(modified)
+            },
+            result = {
+                userTaskEvent.value = TaskListEventResult.LoadingSnap(false)
+            },
+            error = {
+                userTaskEvent.value = TaskListEventResult.LoadingSnap(false)
+            }
+        )
+    }
+
     fun getUserQuickAccessList() {
         launchOnIO(
             doTask = {

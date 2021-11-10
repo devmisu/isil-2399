@@ -24,4 +24,6 @@ interface TaskNetworkRepository {
 
     suspend fun getUserQuickAccessList() : EventResult<ArrayList<QuickAccess>>
 
+    suspend fun snapHour(modifiedTask: Pair<Int, Double>) : EventResult<Boolean>
+
 }

@@ -62,4 +62,10 @@ interface SoleraJobsApi {
         @Query("startDate") startDate: String,
         @Query("endDate") endDate: String
     ) : Response<ArrayList<ProjectResponse>>
+
+    @PUT("requirements/snap/{id}")
+    suspend fun snapTask(
+        @Path("id") id: String,
+        @Body request : UpdateTaskRequest
+    ) : Response<Void>
 }
