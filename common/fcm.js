@@ -1,28 +1,38 @@
 const FirebaseAdmin = require('firebase-admin')
-const serviceAccount = require('../../../solerajobs-firebase-adminsdk-w5ege-5d452ab812.json')
+const serviceAccount = require('../solerajobs-firebase-adminsdk-w5ege-5d452ab812.json')
+const Fcm = require('../models').fcm
 
-// let app = FirebaseAdmin.initializeApp({ credential: FirebaseAdmin.credential.cert(serviceAccount) });
+module.exports = {
+        async pushNotfToMember(memberId, title, body) {
+                
+                try {
 
-        // // Obtener token de sesion
-        // // Guardar fcm en tabla
-        // const fcmToken = 'eMmUwb84QtSWV4smXkhDE8:APA91bFRihW9h9n5I3JXTWj7dpr-_VKS0ocm0U81NgCP4_gQ-HrfrMbjiqsbyeiKHTKIe_VpptzRqFSLLt-81H-LTnymc_ydhP90BLyugwDJh1rhVPtRP8V30EJvV_PNS_vUI5H33MVk'
+                        const fcm = await Fcm.findOne({ where: { memberId: memberId } })
 
-        // const message = {
-        //     data: {
-        //         // TODO: Send data
-        //     },
-        //     notification: {
-        //         title: 'Viejas calientes cerca a tu zona',
-        //         body: 'Y DALE U'
-        //     },
-        //     token: fcmToken
-        // }
+                        if (fcm == null) { throw 'No se encontro token FCM asociado al usuario.' }
 
-        // app.messaging().send(message)
-        // .then((response) => {
-        //     // Response is a message ID string.
-        //     console.log('Successfully sent message:', response);
-        // })
-        // .catch((error) => {
-        //     console.log('Error sending message:', error);
-        // });
+                        let app = FirebaseAdmin.initializeApp({ credential: FirebaseAdmin.credential.cert(serviceAccount) });
+                        
+                        const message = {
+                                data: {
+                                        // TODO: Send data
+                                },
+                                notification: {
+                                        title: title,
+                                        body: body
+                                },
+                                token: fcm.fcmToken
+                        }
+
+                        let result = await app.messaging().send(message)
+
+                        console.log(result)
+
+                        return true
+
+                } catch(error) {
+
+                        throw 'No se pudo enviar notificacion push.'
+                }
+        }
+}

@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 const validator = require('../../../common/validator')
+const fcm = require('../../../common/fcm')
 const MemberRequirement = require('../../../models').member_requirement
 const MemberRequirementLog = require('../../../models').member_requirement_log
 
@@ -40,6 +41,8 @@ routes.post('/', async (req, res) => {
             updatedAt: member_requirement.updatedAt,
             deletedAt: member_requirement.deletedAt
         })
+
+        await fcm.pushNotfToMember(req.body.memberId, 'Se te asigno un requerimiento nuevo!', '')
 
         res.status(201).json()
 
