@@ -13,6 +13,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-winston": "^4.2.0",
+    "firebase-admin": "^10.0.0",
     "google-auth-library": "^7.10.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.2",
@@ -21,7 +22,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
-    "sequelize-auto-v2": "^0.5.3",
     "sequelize-cli": "^6.3.0"
   }
 }
