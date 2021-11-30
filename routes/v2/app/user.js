@@ -6,6 +6,8 @@ const jwt = require('../../../common/jwt')
 const Member = require('../../../models').member
 const Job = require('../../../models').job
 const Area = require('../../../models').area
+const Fcm = require('../../../models').fcm
+const auth = require('../../../middlewares/auth')
 
 Job.belongsTo(Area)
 Member.belongsTo(Job)
@@ -52,6 +54,35 @@ routes.post('/login', async (req, res) => {
 
     } catch(error) {
         
+        res.status(400).json({ message: error })
+    }
+})
+
+// Register FCM Token
+routes.post('/fcm', auth, async (req, res) => {
+
+    try {
+
+        const { result, devMessage } = validator.valid(req.body, ['fcmToken'])
+
+        if (!result) throw devMessage
+
+        const fcm = await Fcm.findOne({ where: { memberId: req.user.id } })
+
+        if (fcm == null) {
+
+            await Fcm.create({ memberId: req.user.id, fcmToken: req.body.fcmToken })
+
+        } else {
+            
+            fcm.fcmToken = req.body.fcmToken
+            await fcm.save()
+        }
+
+        res.json()
+
+    } catch(error) {
+
         res.status(400).json({ message: error })
     }
 })
