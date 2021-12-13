@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 const AreaLog = require('../../../models').area_log
+const Sequelize = require('sequelize')
 
 // All logs
 routes.get('/', async (req, res) => {
@@ -17,7 +18,7 @@ routes.get('/', async (req, res) => {
 })
 
 // All changes for area
-routes.get('/:id', async (req, res) => {
+routes.get('/changes/:id', async (req, res) => {
 
     try {
 
@@ -38,13 +39,19 @@ routes.get('/deleted', async (req, res) => {
 
     try {
 
-        const areas = await AreaLog.findAll({ where: { deletedAt: null }, paranoid: false })
+        const areas = await AreaLog.findAll({ where: {
+            deletedAt: {
+                [Sequelize.Op.not]: null
+            } 
+        }, paranoid: false })
 
-        if (areas == null) { throw 'No hay registros de esta area. '}
+        if (areas == null) { throw 'No hay registros de esta area.'}
 
         res.json(areas)
 
     } catch(error) {
+
+        console.log(error)
 
         res.status(400).json({ message: error })
     }
