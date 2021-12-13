@@ -10,5 +10,6 @@ routes.use('/client', require('./client'))
 routes.use('/job', require('./job'))
 routes.use('/requirement', require('./requirement'))
 routes.use('/member_requirement', require('./member_requirement'))
+routes.use('/project', require('./project'))
 
 module.exports = routes
