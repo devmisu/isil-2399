@@ -5,4 +5,6 @@ routes.get('/', (req, res) => {
     res.send('audit')
 })
 
+routes.use('/area', require('./area'))
+
 module.exports = routes
