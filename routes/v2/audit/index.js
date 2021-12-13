@@ -6,5 +6,6 @@ routes.get('/', (req, res) => {
 })
 
 routes.use('/area', require('./area'))
+routes.use('/member_requirement', require('./member_requirement'))
 
 module.exports = routes
